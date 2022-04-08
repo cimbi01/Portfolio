@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Programozás\\c#\\PortfolioMVC\\Jobs\\Jobs.csproj",
+      "projectUniqueName": "D:\\Programozás\\c#\\PortfolioMVCGithub\\Jobs\\Jobs.csproj",
       "projectName": "Jobs",
-      "projectPath": "D:\\Programozás\\c#\\PortfolioMVC\\Jobs\\Jobs.csproj",
+      "projectPath": "D:\\Programozás\\c#\\PortfolioMVCGithub\\Jobs\\Jobs.csproj",
       "packagesPath": "C:\\Users\\Cimbi\\.nuget\\packages\\",
-      "outputPath": "D:\\Programozás\\c#\\PortfolioMVC\\Jobs\\obj\\",
+      "outputPath": "D:\\Programozás\\c#\\PortfolioMVCGithub\\Jobs\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\PROGRAM FILES\\DOTNET\\sdk\\NuGetFallbackFolder"

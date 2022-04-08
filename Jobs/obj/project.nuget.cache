@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mNExjP1lmPI1u8LqHRrl6QKEWkGos3Uckxdo0e69O7ljzpzGeRvC0qJ7L0D3+w5YKnJTmpiKaDt108hXUg0XyQ==",
+  "dgSpecHash": "zbTHk6YX46DMK1Kc1PtEODGzy0OjKdUNi4AxWVQKRfi+IX0j1JRQm7YxPFwCIgmrA/77oRxbjIl3X2XzykRshg==",
   "success": true,
-  "projectFilePath": "D:\\Programozás\\c#\\PortfolioMVC\\Jobs\\Jobs.csproj",
+  "projectFilePath": "D:\\Programozás\\c#\\PortfolioMVCGithub\\Jobs\\Jobs.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
