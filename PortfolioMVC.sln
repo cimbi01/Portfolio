@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30128.74
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioMVC", "PortfolioMVC\PortfolioMVC.csproj", "{1966802F-45B7-40AD-978C-57C5BAF8DFC2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs", "Jobs\Jobs.csproj", "{B8A3AA71-2726-473A-86D1-FEB6A102AB2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jobs.Test", "Jobs.Test\Jobs.Test.csproj", "{12FCD91A-C7EC-4761-9750-06F98A4A0C01}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1966802F-45B7-40AD-978C-57C5BAF8DFC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1966802F-45B7-40AD-978C-57C5BAF8DFC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1966802F-45B7-40AD-978C-57C5BAF8DFC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1966802F-45B7-40AD-978C-57C5BAF8DFC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8A3AA71-2726-473A-86D1-FEB6A102AB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8A3AA71-2726-473A-86D1-FEB6A102AB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8A3AA71-2726-473A-86D1-FEB6A102AB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8A3AA71-2726-473A-86D1-FEB6A102AB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12FCD91A-C7EC-4761-9750-06F98A4A0C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12FCD91A-C7EC-4761-9750-06F98A4A0C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12FCD91A-C7EC-4761-9750-06F98A4A0C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12FCD91A-C7EC-4761-9750-06F98A4A0C01}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F012D73-E530-426E-99EF-860487DE7A46}
+	EndGlobalSection
+EndGlobal
