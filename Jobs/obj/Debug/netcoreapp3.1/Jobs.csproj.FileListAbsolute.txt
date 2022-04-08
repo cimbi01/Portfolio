@@ -1,0 +1,8 @@
+D:\Programozás\c#\PortfolioMVC\Jobs\obj\Debug\netcoreapp3.1\Jobs.AssemblyInfoInputs.cache
+D:\Programozás\c#\PortfolioMVC\Jobs\obj\Debug\netcoreapp3.1\Jobs.AssemblyInfo.cs
+D:\Programozás\c#\PortfolioMVC\Jobs\obj\Debug\netcoreapp3.1\Jobs.csproj.CoreCompileInputs.cache
+D:\Programozás\c#\PortfolioMVC\Jobs\bin\Debug\netcoreapp3.1\Jobs.deps.json
+D:\Programozás\c#\PortfolioMVC\Jobs\bin\Debug\netcoreapp3.1\Jobs.dll
+D:\Programozás\c#\PortfolioMVC\Jobs\bin\Debug\netcoreapp3.1\Jobs.pdb
+D:\Programozás\c#\PortfolioMVC\Jobs\obj\Debug\netcoreapp3.1\Jobs.dll
+D:\Programozás\c#\PortfolioMVC\Jobs\obj\Debug\netcoreapp3.1\Jobs.pdb
