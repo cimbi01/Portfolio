@@ -41,6 +41,8 @@ namespace Jobs.Common
          *          Title (string)
          *          Details (string)
          *          ActionToSolve? (Action
+         *          
+         * TODO: Rate Employees, Employers
          */
 
         public List<Employee> Employees { get; } = new List<Employee>();
@@ -60,7 +62,13 @@ namespace Jobs.Common
         }
 
         //TODO: implementation
-        public void OfferJob(JobData jobData, WorkingPerson from, WorkingPerson to)
+        public void OfferJob(JobData jobData, Employer from, Employee to)
+        {
+            throw new NotImplementedException();
+        }
+
+        //TODO: implementation
+        public void ApplyForJob(JobData jobData, Employee from, Employer to)
         {
             throw new NotImplementedException();
         }

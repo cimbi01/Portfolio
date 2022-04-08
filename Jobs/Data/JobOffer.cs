@@ -13,7 +13,7 @@ namespace Jobs.Data
         public WorkingPerson.WorkingPerson Offerer { get; }
 
         /// <summary>
-        /// The <see cref="WorkingPerson"/> whos receiving the job offer. Can be null if its Advertisement
+        /// The <see cref="WorkingPerson"/> whos receiving the job offer. Can be null if its an Advertisement.
         /// </summary>
         public WorkingPerson.WorkingPerson? Receiver { get; }
 

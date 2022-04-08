@@ -7,8 +7,12 @@ namespace Jobs.Data.WorkingPerson
 {
     public class WorkingPerson
     {
-        public Contact Contact { get; }
+        public WorkingPerson(string name)
+        {
+            this.Contact.Name = name;
+        }
+        public Contact Contact { get; } = new Contact();
 
-        public List<JobOffer> JobOffers{ get; }
+        public List<JobOffer> JobOffers { get; } = new List<JobOffer>();
     }
 }
