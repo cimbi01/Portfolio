@@ -1,9 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\Cimbi\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\Cimbi\\.nuget\\packages",
-      "C:\\PROGRAM FILES\\DOTNET\\sdk\\NuGetFallbackFolder"
-    ]
-  }
-}
