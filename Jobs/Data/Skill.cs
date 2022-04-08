@@ -7,6 +7,7 @@ namespace Jobs.Data
         public const int MinimumRangeOfKnowledge = 0;
         public const int MaximumRangeOfKnowledge = 5;
 
+        //TODO: Should be predefined
         public string Name { get; }
         public string Details { get; }
 
