@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Jobs.Data.WorkingPerson.Employer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,9 @@ namespace Jobs.Data
 {
     class FinishedJobData : JobData
     {
+        public FinishedJobData(string name, Employer employer) : base(name, employer)
+        {
+        }
 
         /// <summary>
         /// End time of the job.
