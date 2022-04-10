@@ -335,7 +335,8 @@ namespace Jobs.Test
             this.InitEmployee(employeeKnowledgeRanges);
             this.InitJobData(neededKnowledgeRanges);
         }
-
+        
+        //TODO: Refactor -> SkillGeneration
         private void InitEmployee(Dictionary<string, int> employeeKnowledgeRanges)
         {
             string testName = "TestName";
@@ -352,6 +353,7 @@ namespace Jobs.Test
             employee.ProfessionData.Skills.AddRange(employeeSkills);
         }
 
+        //TODO: Refactor -> SkillGeneration
         private void InitJobData(Dictionary<string, int> neededKnowledgeRanges)
         {
             Employer employer = new Employer("Employer1");
