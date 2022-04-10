@@ -6,7 +6,7 @@ namespace Jobs.Common.Builders
 {
     public abstract class AbstractBuilder<T> where T : new()
     {
-        //TODO: Builder for WorkingPerson -> Employee, Employer
+        //TODO: Factory for WorkingPerson -> Employee, Employer
         //TODO: Builder for JobOffer
         //TODO: Builder for JobData
         //TODO: Builder for FinishedJobData

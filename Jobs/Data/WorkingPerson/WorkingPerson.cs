@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Jobs.Data.WorkingPerson
 {
-    public class WorkingPerson
+    public abstract class WorkingPerson
     {
         public WorkingPerson()
         {
