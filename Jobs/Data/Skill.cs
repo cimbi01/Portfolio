@@ -9,7 +9,11 @@ namespace Jobs.Data
 
         //TODO: Should be predefined
         public string Name { get; }
-        public string Details { get; }
+
+        /// <summary>
+        /// Details about the skill. Can be null.
+        /// </summary>
+        public string? Details { get; }
 
         [Range(MinimumRangeOfKnowledge, MaximumRangeOfKnowledge)]
         public int RangeOfKnowledge { get; }
