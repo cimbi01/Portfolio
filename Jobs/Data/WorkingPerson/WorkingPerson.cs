@@ -7,6 +7,10 @@ namespace Jobs.Data.WorkingPerson
 {
     public class WorkingPerson
     {
+        public WorkingPerson()
+        {
+
+        }
         public WorkingPerson(string name)
         {
             this.Contact.Name = name;
