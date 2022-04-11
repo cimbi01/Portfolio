@@ -1,5 +1,7 @@
 ﻿using Jobs.Common;
 using Jobs.Common.Factories;
+using Jobs.Data;
+using Jobs.Data.WorkingPerson;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using NUnit.Framework;
@@ -10,60 +12,149 @@ using System.Text;
 namespace Jobs.Test
 {
     [TestFixture]
-    class FactoryTest
+    class FactoryTest : TestBase
     {
-        private static OfferHandler offerHandler;
-        private static Factory factory;
+
         [SetUp]
-        public static void Init()
+        public override void Init()
         {
-            FactoryTest.offerHandler = new OfferHandler();
-            FactoryTest.factory = new Factory(offerHandler);
+            this.offerHandler = new OfferHandler();
+            this.factory = new WorkingPersonFactory(this.offerHandler);
+        }
+
+        private WorkingPerson CreateAndAssertNamedWorkingPerson(bool employee)
+        {
+            string name = "test";
+            WorkingPerson workingPerson;
+            if (employee)
+            {
+                workingPerson = this.WorkingPersonFactory.CreateEmployee(name);
+            }
+            else
+            {
+                workingPerson = this.WorkingPersonFactory.CreateEmployer(name);
+            }
+            Assert.AreEqual(name, workingPerson.Contact.Name);
+            return workingPerson;
+        }
+
+        private Reference CreateAndAssertReference(string? details)
+        {
+            string name = "ref";
+            string url = "https://www.youtube.com/";
+            Reference reference = this.factory.CreateReference(name, url, details);
+            Assert.AreEqual(name, reference.Name);
+            Assert.AreEqual(url, reference.Url.OriginalString);
+            Assert.AreEqual(details, reference.Details);
+            return reference;
+        }
+
+        private Skill CreateAndAssertSkill(string? details)
+        {
+            string name = "ref";
+            int rangeOfKnowledge = 3;
+            Skill skill = this.factory.CreateSkill(name, rangeOfKnowledge, details);
+            Assert.AreEqual(name, skill.Name);
+            Assert.AreEqual(rangeOfKnowledge, skill.RangeOfKnowledge);
+            Assert.AreEqual(details, skill.Details);
+            return skill;
+        }
+
+        private Contact CreateAndAssertContact(string? emailAddress, string? phoneNumber)
+        {
+            string name = "contact";
+            Contact contact = this.factory.CreateContact(name, emailAddress, phoneNumber);
+            Assert.AreEqual(name, contact.Name);
+            Assert.AreEqual(emailAddress, contact.EmailAddress);
+            Assert.AreEqual(phoneNumber, contact.PhoneNumber);
+            return contact;
         }
 
         [Test]
         public void CreateEmployeeTest()
         {
-            string name = "name";
-            Employee employee = FactoryTest.factory.CreateEmployee(name);
-            Assert.AreEqual(name, employee.Contact.Name);
-            Assert.IsTrue(FactoryTest.offerHandler.Employees.Contains(employee));
+            Employee employee = (Employee)this.CreateAndAssertNamedWorkingPerson(true);
+            Assert.IsTrue(this.offerHandler.Employees.Contains(employee));
         }
 
         [Test]
         public void CreateEmployerTest()
         {
-            OfferHandler offerHandler = new OfferHandler();
-            Factory factory = new Factory(offerHandler);
-            string name = "name";
-            Employer employer = factory.CreateEmployer(name);
-            Assert.AreEqual(name, employer.Contact.Name);
-            Assert.IsTrue(offerHandler.Employers.Contains(employer));
+            Employer employer = (Employer)this.CreateAndAssertNamedWorkingPerson(false);
+            Assert.IsTrue(this.offerHandler.Employers.Contains(employer));
         }
 
         [Test]
         public void CreateReferenceDetailsNullTest()
         {
-            string name = "ref";
             string? details = null;
-            string url = "https://www.youtube.com/";
-            Reference reference = FactoryTest.factory.CreateReference(name, url, details);
-            Assert.AreEqual(name, reference.Name);
-            Assert.AreEqual(url, reference.Url.OriginalString);
-            Assert.AreEqual(details, reference.Details);
+            Reference reference = this.CreateAndAssertReference(details);
+            Assert.Null(reference.Details);
         }
 
-        //TODO: Refactor function
         [Test]
         public void CreateReferenceDetailsNotNullTest()
         {
-            string name = "ref";
             string details = "details";
-            string url = "https://www.youtube.com/";
-            Reference reference = FactoryTest.factory.CreateReference(name, url, details);
-            Assert.AreEqual(name, reference.Name);
-            Assert.AreEqual(url, reference.Url.OriginalString);
-            Assert.AreEqual(details, reference.Details);
+            Reference reference = this.CreateAndAssertReference(details);
+            Assert.NotNull(reference.Details);
         }
+
+        [Test]
+        public void CreateSkillDetailsNullTest()
+        {
+            string? details = null;
+            Skill skill = this.CreateAndAssertSkill(details);
+            Assert.IsNull(skill.Details);
+        }
+
+        [Test]
+        public void CreateSkillDetailsNotNullTest()
+        {
+            string details = "asd";
+            Skill skill = this.CreateAndAssertSkill(details);
+            Assert.IsNotNull(skill.Details);
+        }
+
+        [Test]
+        public void CreateContactNoNullTest()
+        {
+            string? email = "email";
+            string? phone = "phone";
+            Contact contact = this.CreateAndAssertContact(email, phone);
+            Assert.NotNull(contact.EmailAddress);
+            Assert.NotNull(contact.PhoneNumber);
+        }
+
+        [Test]
+        public void CreateContactEmailNullTest()
+        {
+            string? email = null;
+            string? phone = "phone";
+            Contact contact = this.CreateAndAssertContact(email, phone);
+            Assert.IsNull(contact.EmailAddress);
+            Assert.NotNull(contact.PhoneNumber);
+        }
+
+        [Test]
+        public void CreateContactPhoneNullTest()
+        {
+            string? email = "email";
+            string? phone = null;
+            Contact contact = this.CreateAndAssertContact(email, phone);
+            Assert.NotNull(contact.EmailAddress);
+            Assert.IsNull(contact.PhoneNumber);
+        }
+
+        [Test]
+        public void CreateContactPhoneNullEmailNullTest()
+        {
+            string? email = null;
+            string? phone = null;
+            Contact contact = this.CreateAndAssertContact(email, phone);
+            Assert.IsNull(contact.EmailAddress);
+            Assert.IsNull(contact.PhoneNumber);
+        }
+
     }
 }

@@ -13,6 +13,13 @@ namespace Jobs.Test
     [TestFixture]
     class JobDataTest : TestBase
     {
+        [SetUp]
+        public override void Init()
+        {
+            this.offerHandler = new OfferHandler();
+            this.factory = new WorkingPersonFactory(this.offerHandler);
+        }
+
         private Employee employee;
         private JobData jobData;
         private static Dictionary<string, int>[][] testCasesForAllMatch =
@@ -333,8 +340,6 @@ namespace Jobs.Test
 
         private void Init(Dictionary<string, int> neededKnowledgeRanges, Dictionary<string, int> employeeKnowledgeRanges)
         {
-            this.offerHandler = new OfferHandler();
-            this.factory = new Factory(this.offerHandler);
             this.InitEmployee(employeeKnowledgeRanges);
             this.InitJobData(neededKnowledgeRanges);
         }
@@ -343,7 +348,7 @@ namespace Jobs.Test
         private void InitEmployee(Dictionary<string, int> employeeKnowledgeRanges)
         {
             string testName = "Emloyee1";
-            employee = this.factory.CreateEmployee(testName);
+            employee = this.WorkingPersonFactory.CreateEmployee(testName);
             List<Skill> employeeSkills = new List<Skill>();
             for (int i = 0; i < employeeKnowledgeRanges.Keys.Count; i++)
             {
@@ -360,7 +365,7 @@ namespace Jobs.Test
         private void InitJobData(Dictionary<string, int> neededKnowledgeRanges)
         {
             string testName = "Employer1";
-            Employer employer = this.factory.CreateEmployer(testName);
+            Employer employer = this.WorkingPersonFactory.CreateEmployer(testName);
             jobData = new JobData("job1", employer);
 
             List<Skill> neededSkills = new List<Skill>();

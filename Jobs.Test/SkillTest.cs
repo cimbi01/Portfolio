@@ -12,12 +12,6 @@ namespace Jobs.Test
     [TestFixture]
     class SkillTest : TestBase
     {
-        [SetUp]
-        public void Init()
-        {
-            this.offerHandler = new OfferHandler();
-            this.factory = new Factory(this.offerHandler);
-        }
 
         [Test]
         public void InValidRangeTest()

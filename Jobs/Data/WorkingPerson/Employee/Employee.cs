@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Jobs.Common.Factories;
+using System;
 using System.Collections.Generic;
 
 namespace Jobs.Data.WorkingPerson.Employee
 {
     public class Employee : WorkingPerson
     {
-        public Employee(string name) : base(name)
-        {}
+        internal Employee(string name) : base(name)
+        {
+            this.ProfessionData = new Factory().CreateProfessionData();
+        }
 
-        //TODO: use Factory.CreateProfessionData()
-        public ProfessionData ProfessionData { get; set; } = new ProfessionData();
+        public ProfessionData ProfessionData { get; }
     }
 }

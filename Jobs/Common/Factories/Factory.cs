@@ -10,30 +10,10 @@ namespace Jobs.Common.Factories
 {
     public class Factory
     {
-        public OfferHandler OfferHandler { get; }
-        public Factory(OfferHandler offerHandler)
+        public Skill CreateSkill(string name, int rangeOfKnowledge, string? details = null)
         {
-            this.OfferHandler = offerHandler;
-        }
-
-        public Employee CreateEmployee(string name)
-        {
-            Employee employee = new Employee(name);
-            this.OfferHandler.Employees.Add(employee);
-            return employee;
-        }
-       
-        public Employer CreateEmployer(string name)
-        {
-            Employer employer = new Employer(name);
-            this.OfferHandler.Employers.Add(employer);
-            return employer;
-        }
-
-        //TODO: implementation
-        public Skill CreateSkill()
-        {
-            throw new NotImplementedException();
+            Skill skill = new Skill(name, rangeOfKnowledge, details);
+            return skill;
         }
 
         public Reference CreateReference(string name, string url, string? details = null)
@@ -43,16 +23,16 @@ namespace Jobs.Common.Factories
             return reference;
         }
 
-        //TODO: implementation
-        public Contact CreateContact()
+        public Contact CreateContact(string name, string? emailAddress = null, string? phoneNumber = null)
         {
-            throw new NotImplementedException();
+            Contact contact = new Contact(name, emailAddress, phoneNumber);
+            return contact;
         }
 
-        //TODO: implementation
         public ProfessionData CreateProfessionData()
         {
-            throw new NotImplementedException();
+            ProfessionData professionData = new ProfessionData();
+            return professionData;
         }
     }
 }

@@ -2,6 +2,13 @@
 {
     public class Contact
     {
+        public Contact(string name, string? emailAddress = null, string? phoneNumber = null)
+        {
+            this.Name = name;
+            this.EmailAddress = emailAddress;
+            this.PhoneNumber = phoneNumber;
+        }
+
         public string Name { get; set; }
 
         /// <summary>
