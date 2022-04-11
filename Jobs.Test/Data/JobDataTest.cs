@@ -1,6 +1,7 @@
 ﻿using Jobs.Common;
 using Jobs.Common.Factories;
 using Jobs.Data;
+using Jobs.Data.Exceptions;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using NUnit.Framework;
@@ -379,7 +380,7 @@ namespace Jobs.Test.Data
         public void CalculateSuitabilityAllMatchTest(Dictionary<string, int> neededKnowledgeRanges, Dictionary<string, int> employeeKnowledgeRanges)
         {
             this.Init(neededKnowledgeRanges, employeeKnowledgeRanges);
-            double suitability = jobData.CalculateSuitability(employee);
+            double suitability = this.jobData.CalculateSuitability(employee);
             double expectedSuitability = 1;
 
             Assert.AreEqual(expectedSuitability, suitability);
@@ -418,6 +419,30 @@ namespace Jobs.Test.Data
 
             Assert.LessOrEqual(suitability, 1);
             Assert.GreaterOrEqual(suitability, 0);
+        }
+
+        [Test]
+        public void StartTest()
+        {
+            this.Init(new Dictionary<string, int>(), new Dictionary<string, int>());
+            this.jobData.Start();
+            Assert.IsTrue(this.jobData.Started());
+        }
+
+        [Test]
+        public void EndNotStartedTest()
+        {
+            this.Init(new Dictionary<string, int>(), new Dictionary<string, int>());
+            Assert.Throws<JobNotStartedException>(() => this.jobData.End());
+        }
+
+        [Test]
+        public void EndStartedTest()
+        {
+            this.Init(new Dictionary<string, int>(), new Dictionary<string, int>());
+            this.jobData.Start();
+            this.jobData.End();
+            Assert.IsTrue(this.jobData.Ended());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Jobs.Data.WorkingPerson.Employee;
+﻿using Jobs.Data.Exceptions;
+using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,25 @@ namespace Jobs.Data
         /// </summary>
         public string? Details { get; }
 
-        //TODO: End()
-        // TODO: eventhandler -> set to false -> EndTime = DateTime.Now, null values needs to be initialized
         /// <summary>
         /// Start time of the job. Can be null, if not started yet.
         /// </summary>
         public DateTime? StartTime { get; protected set; }
+
+        /// <summary>
+        /// End time of the job. Can be null, if not ended yet.
+        /// </summary>
+        public DateTime? EndTime { get; protected set; }
+
+        public bool Ended()
+        {
+            return (this.EndTime != null);
+        }
+
+        public bool Started()
+        {
+            return (this.StartTime != null);
+        }
 
         public Employer Employer { get; }
 
@@ -88,6 +102,23 @@ namespace Jobs.Data
         public void Start()
         {
             this.StartTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// If <see cref="Started()"/> is true then sets <see cref="EndTime"/> to <see cref="DateTime.Now"/>
+        /// If <see cref="Started()"/> is false then throws <see cref="JobNotStartedException"/>
+        /// </summary>
+        /// <exception cref="JobNotStartedException"/>
+        public void End()
+        {
+            if (this.Started())
+            { 
+                this.EndTime = DateTime.Now;
+            }
+            else
+            {
+                throw new JobNotStartedException();
+            }
         }
     }
 }
