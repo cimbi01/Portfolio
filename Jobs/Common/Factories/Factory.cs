@@ -34,5 +34,11 @@ namespace Jobs.Common.Factories
             ProfessionData professionData = new ProfessionData();
             return professionData;
         }
+
+        public JobData CreateJobData(string name, Employer employer)
+        {
+            JobData jobData = new JobData(name, employer);
+            return jobData;
+        }
     }
 }

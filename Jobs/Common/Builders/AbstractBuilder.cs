@@ -11,8 +11,6 @@ namespace Jobs.Common.Builders
         protected List<Action> SetActions { get; } = new List<Action>();
         // base fields
 
-        //TODO: Builder for JobData
-        //TODO: Builder for FinishedJobData
         //TODO: Builder for JobOffer -> add to list
         protected T product;
 

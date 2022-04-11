@@ -365,12 +365,11 @@ namespace Jobs.Test.Data
             employee.ProfessionData.Skills.AddRange(employeeSkills);
         }
 
-        //TODO: JobData builder
         private void InitJobData(Dictionary<string, int> neededKnowledgeRanges)
         {
             string testName = "Employer1";
             Employer employer = this.WorkingPersonFactory.CreateEmployer(testName);
-            jobData = new JobData("job1", employer);
+            jobData = this.factory.CreateJobData("job1", employer);
             List<Skill> neededSkills = this.CreateSkills(neededKnowledgeRanges);
             jobData.NeededSkills.AddRange(neededSkills);
         }

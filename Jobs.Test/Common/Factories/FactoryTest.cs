@@ -156,5 +156,15 @@ namespace Jobs.Test.Common.Factories
             Assert.IsNull(contact.PhoneNumber);
         }
 
+        [Test]
+        public void CreateJobDataTest()
+        {
+            string employerName = "empn";
+            string jobDataName = "jdn";
+            Employer employer = this.WorkingPersonFactory.CreateEmployer(employerName);
+            JobData jobData = this.factory.CreateJobData(jobDataName, employer);
+            Assert.AreEqual(employer, jobData.Employer);
+            Assert.AreEqual(jobDataName, jobData.Name);
+        }
     }
 }
