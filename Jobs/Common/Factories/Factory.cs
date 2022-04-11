@@ -36,10 +36,11 @@ namespace Jobs.Common.Factories
             throw new NotImplementedException();
         }
 
-        //TODO: implementation
-        public Reference CreateReference()
+        public Reference CreateReference(string name, string url, string? details = null)
         {
-            throw new NotImplementedException();
+            Uri urlGenerated = new Uri(url);
+            Reference reference = new Reference(name, urlGenerated, details);
+            return reference;
         }
 
         //TODO: implementation
