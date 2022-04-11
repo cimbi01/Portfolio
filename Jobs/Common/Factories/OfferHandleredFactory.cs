@@ -53,7 +53,7 @@ namespace Jobs.Common.Factories
                 if(offerType != OfferType.Advertisement)
                 {
                     throw new NotAuthorizedException();
-                }    
+                }
             }
 
             if (offerer is Employee)

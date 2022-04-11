@@ -45,10 +45,25 @@ namespace Jobs.Common
         public List<Employer> Employers { get; } = new List<Employer>();
         public List<JobOffer> JobOffers { get; } = new List<JobOffer>();
 
-        //TODO: implementation
+        /// <summary>
+        /// Adds Employee whos accepting to <see cref="JobOffer.JobData.Employees"/>
+        /// Set <see cref="JobOffer.Accepted"/> to true
+        /// </summary>
+        /// <param name="jobOffer"></param>
         public void AcceptJobOffer(JobOffer jobOffer)
         {
-            throw new NotImplementedException();
+            WorkingPerson receiver = jobOffer.Receiver;
+            // If employee accepts offering
+            if (receiver is Employee)
+            {
+                jobOffer.JobData.Employees.Add((Employee)receiver);
+            }
+            // If employer accepts application
+            else
+            {
+                jobOffer.JobData.Employees.Add((Employee)jobOffer.Offerer);
+            }
+            jobOffer.Accepted = true;
         }
 
         //TODO: implementation
@@ -69,6 +84,10 @@ namespace Jobs.Common
             throw new NotImplementedException();
         }
 
-        //TODO: Advertise job
+        //TODO: implementation
+        public void AdvertiseJob(JobData jobData, Employee from)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
