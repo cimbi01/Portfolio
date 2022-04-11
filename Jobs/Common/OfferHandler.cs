@@ -20,19 +20,7 @@ namespace Jobs.Common
          * AcceptJobOffer(JobOffer) -> To.JobOffers.Add(JobOffer) -> From.JobOffers.Add(JobOffer) -> JobOffer.Accepted = true
          * Decline(JobOffer) -> JobOffer.Accepted = false
          * 
-         * TODO: Project:Test -> Test Models
-         * 
          * TODO: MVC:
-         * 
-         * TODO: EntityFrameWork
-         * TODO: Project:Data -> Data Context, Repositories, Entity FW
-         * 
-         * TODO: Identity:
-         *      Users
-         *      Login
-         *      Roles:
-         *          Employee
-         *          Employer
          * 
          * TODO: Notifications:
          *      NeededData -> Notification for Employees/Employers for needed data
@@ -40,9 +28,17 @@ namespace Jobs.Common
          *          Target (WorkingPerson)
          *          Title (string)
          *          Details (string)
-         *          ActionToSolve? (Action
-         *          
-         * TODO: Rate Employees, Employers
+         *          ActionToSolve? (Action)
+         * 
+         * TODO: EntityFrameWork
+         *      TODO: Project:Data -> Data Context, Repositories, Entity FW
+         * 
+         * TODO: Identity:
+         *      Users
+         *      Login
+         *      Roles:
+         *          Employee
+         *          Employer
          */
 
         public List<Employee> Employees { get; } = new List<Employee>();

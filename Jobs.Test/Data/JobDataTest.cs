@@ -21,7 +21,7 @@ namespace Jobs.Test.Data
         public override void Init()
         {
             this.offerHandler = new OfferHandler();
-            this.factory = new WorkingPersonFactory(this.offerHandler);
+            this.factory = new OfferHandleredFactory(this.offerHandler);
         }
 
         private static Dictionary<string, int>[][] testCasesForAllMatch =

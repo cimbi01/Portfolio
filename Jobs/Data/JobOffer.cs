@@ -2,9 +2,16 @@
 
 namespace Jobs.Data
 {
-    //TODO: Refactor by OfferTypes
     public class JobOffer
     {
+        public JobOffer(OfferType offerType, WorkingPerson.WorkingPerson offerer, JobData jobData, WorkingPerson.WorkingPerson? receiver = null)
+        {
+            this.OfferType = offerType;
+            this.Offerer = offerer;
+            this.Receiver = receiver;
+            this.JobData = jobData;
+        }
+
         public OfferType OfferType { get; }
 
         /// <summary>
@@ -19,6 +26,7 @@ namespace Jobs.Data
 
         public JobData JobData { get; }
 
+        //TODO: Set only once
         /// <summary>
         /// True if accepted, false if declined, null if theres no feedback
         /// </summary>

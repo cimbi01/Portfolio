@@ -1,4 +1,6 @@
-﻿using Jobs.Data.WorkingPerson.Employee;
+﻿using Jobs.Data;
+using Jobs.Data.WorkingPerson;
+using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using System;
 using System.Collections.Generic;
@@ -6,12 +8,10 @@ using System.Text;
 
 namespace Jobs.Common.Factories
 {
-    public class WorkingPersonFactory : Factory
+    public class OfferHandleredFactory : Factory
     {
         public OfferHandler OfferHandler { get; }
-        public WorkingPersonFactory() :  base()
-        {}
-        public WorkingPersonFactory(OfferHandler offerHandler) : base()
+        public OfferHandleredFactory(OfferHandler offerHandler) : base()
         {
             this.OfferHandler = offerHandler;
         }
@@ -38,6 +38,12 @@ namespace Jobs.Common.Factories
             Employer employer = new Employer(name);
             this.OfferHandler.Employers.Add(employer);
             return employer;
+        }
+
+        //TODO: implementation, add joboffer to list
+        public JobOffer CreateJobOffer(OfferType offerType, WorkingPerson offerer, JobData jobData, WorkingPerson? receiver = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

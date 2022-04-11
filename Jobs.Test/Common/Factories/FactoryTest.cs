@@ -19,7 +19,7 @@ namespace Jobs.Test.Common.Factories
         public override void Init()
         {
             this.offerHandler = new OfferHandler();
-            this.factory = new WorkingPersonFactory(this.offerHandler);
+            this.factory = new OfferHandleredFactory(this.offerHandler);
         }
 
         private WorkingPerson CreateAndAssertNamedWorkingPerson(bool employee)
