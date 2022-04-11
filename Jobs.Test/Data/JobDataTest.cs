@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Jobs.Test
+namespace Jobs.Test.Data
 {
     [TestFixture]
     class JobDataTest : TestBase

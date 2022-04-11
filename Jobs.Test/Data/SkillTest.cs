@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Jobs.Test
+namespace Jobs.Test.Data
 {
     [TestFixture]
     class SkillTest : TestBase

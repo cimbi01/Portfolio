@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Jobs.Test
+namespace Jobs.Test.Common.Factories
 {
     [TestFixture]
     class FactoryTest : TestBase
