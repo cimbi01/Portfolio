@@ -1,4 +1,6 @@
-﻿using Jobs.Data;
+﻿using Jobs.Common;
+using Jobs.Common.Factories;
+using Jobs.Data;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -8,15 +10,22 @@ using System.Text;
 namespace Jobs.Test
 {
     [TestFixture]
-    class SkillTest
+    class SkillTest : TestBase
     {
+        [SetUp]
+        public void Init()
+        {
+            this.offerHandler = new OfferHandler();
+            this.factory = new Factory(this.offerHandler);
+        }
+
         [Test]
         public void InValidRangeTest()
         {
             string name = "TestSkill";
             string details = "TestDetails";
             int rangeOfKnowledge = 7;
-            Skill skill = new Skill(name, details, rangeOfKnowledge);
+            Skill skill = this.factory.CreateSkill(name, rangeOfKnowledge, details);
             ICollection<ValidationResult> results = new List<ValidationResult>();
             bool valid = SkillTest.Validate(skill, out results);
             Assert.AreEqual(name, skill.Name);
@@ -31,7 +40,7 @@ namespace Jobs.Test
             string name = "TestSkill";
             string details = "TestDetails";
             int rangeOfKnowledge = 3;
-            Skill skill = new Skill(name, details, rangeOfKnowledge);
+            Skill skill = this.factory.CreateSkill(name, rangeOfKnowledge, details);
             ICollection<ValidationResult> results = new List<ValidationResult>();
             bool valid = SkillTest.Validate(skill, out results);
             Assert.AreEqual(name, skill.Name);

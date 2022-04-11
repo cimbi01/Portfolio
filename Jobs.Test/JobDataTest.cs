@@ -1,4 +1,6 @@
-﻿using Jobs.Data;
+﻿using Jobs.Common;
+using Jobs.Common.Factories;
+using Jobs.Data;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using NUnit.Framework;
@@ -9,11 +11,10 @@ using System.Linq;
 namespace Jobs.Test
 {
     [TestFixture]
-    class JobDataTest
+    class JobDataTest : TestBase
     {
         private Employee employee;
         private JobData jobData;
-
         private static Dictionary<string, int>[][] testCasesForAllMatch =
         {
             /*
@@ -332,6 +333,8 @@ namespace Jobs.Test
 
         private void Init(Dictionary<string, int> neededKnowledgeRanges, Dictionary<string, int> employeeKnowledgeRanges)
         {
+            this.offerHandler = new OfferHandler();
+            this.factory = new Factory(this.offerHandler);
             this.InitEmployee(employeeKnowledgeRanges);
             this.InitJobData(neededKnowledgeRanges);
         }
@@ -339,24 +342,25 @@ namespace Jobs.Test
         //TODO: Refactor -> SkillGeneration
         private void InitEmployee(Dictionary<string, int> employeeKnowledgeRanges)
         {
-            string testName = "TestName";
-            employee = new Employee(testName);
+            string testName = "Emloyee1";
+            employee = this.factory.CreateEmployee(testName);
             List<Skill> employeeSkills = new List<Skill>();
             for (int i = 0; i < employeeKnowledgeRanges.Keys.Count; i++)
             {
                 string skillName = employeeKnowledgeRanges.Keys.ElementAt(i);
                 int range = employeeKnowledgeRanges[skillName];
                 string details = "details" + Convert.ToString(range);
-                employeeSkills.Add(
-                    new Skill(skillName, details, range));
+                employeeSkills.Add(this.factory.CreateSkill(skillName, range, details));
             }
             employee.ProfessionData.Skills.AddRange(employeeSkills);
         }
 
         //TODO: Refactor -> SkillGeneration
+        //TODO: JobData builder
         private void InitJobData(Dictionary<string, int> neededKnowledgeRanges)
         {
-            Employer employer = new Employer("Employer1");
+            string testName = "Employer1";
+            Employer employer = this.factory.CreateEmployer(testName);
             jobData = new JobData("job1", employer);
 
             List<Skill> neededSkills = new List<Skill>();
@@ -365,8 +369,7 @@ namespace Jobs.Test
                 string skillName = neededKnowledgeRanges.Keys.ElementAt(i);
                 int range = neededKnowledgeRanges[skillName];
                 string details = "details" + Convert.ToString(range);
-                neededSkills.Add(
-                    new Skill(skillName, details, range));
+                neededSkills.Add(this.factory.CreateSkill(skillName, range, details));
             }
             jobData.NeededSkills.AddRange(neededSkills);
         }

@@ -18,7 +18,7 @@ namespace Jobs.Data
         [Range(MinimumRangeOfKnowledge, MaximumRangeOfKnowledge)]
         public int RangeOfKnowledge { get; }
 
-        public Skill(string name, string details, int rangeOfKnowledge)
+        public Skill(string name, int rangeOfKnowledge, string? details = null)
         {
             this.Name = name;
             this.Details = details;

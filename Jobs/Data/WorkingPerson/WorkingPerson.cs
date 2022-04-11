@@ -15,6 +15,8 @@ namespace Jobs.Data.WorkingPerson
         {
             this.Contact.Name = name;
         }
+
+        //TODO: use Factory.CreateContact()
         public Contact Contact { get; } = new Contact();
 
         public List<JobOffer> JobOffers { get; } = new List<JobOffer>();

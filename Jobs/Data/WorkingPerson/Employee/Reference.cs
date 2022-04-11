@@ -4,6 +4,13 @@ namespace Jobs.Data.WorkingPerson.Employee
 {
     public class Reference
     {
+        public Reference(string name, Uri url, string? details = null)
+        {
+            this.Name = name;
+            this.Details = details;
+            this.Url = url;
+        }
+
         public string Name { get; set; }
 
         /// <summary>
