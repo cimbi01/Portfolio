@@ -16,7 +16,7 @@ namespace Jobs.Test
         public virtual void Init()
         {
             this.offerHandler = new OfferHandler();
-            this.factory = new Factory();
+            this.factory = new WorkingPersonFactory(this.offerHandler);
         }
 
         protected WorkingPersonFactory WorkingPersonFactory => (WorkingPersonFactory)this.factory;
