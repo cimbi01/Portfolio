@@ -13,34 +13,39 @@ namespace Jobs.Test
     class SkillTest : TestBase
     {
 
-        [Test]
-        public void InValidRangeTest()
+        private Skill CreateAndAssertSkill(int rangeOfKnowledge)
         {
             string name = "TestSkill";
             string details = "TestDetails";
-            int rangeOfKnowledge = 7;
             Skill skill = this.factory.CreateSkill(name, rangeOfKnowledge, details);
             ICollection<ValidationResult> results = new List<ValidationResult>();
             bool valid = SkillTest.Validate(skill, out results);
             Assert.AreEqual(name, skill.Name);
             Assert.AreEqual(details, skill.Details);
             Assert.AreEqual(rangeOfKnowledge, skill.RangeOfKnowledge);
-            Assert.IsFalse(valid);
+            if(rangeOfKnowledge > Skill.MaximumRangeOfKnowledge || rangeOfKnowledge < Skill.MinimumRangeOfKnowledge)
+            {
+                Assert.IsFalse(valid);
+            }
+            else
+            {
+                Assert.IsTrue(valid);
+            }
+            return skill;
+        }
+
+        [Test]
+        public void InValidRangeTest()
+        {
+            int rangeOfKnowledge = 7;
+            this.CreateAndAssertSkill(rangeOfKnowledge);
         }
 
         [Test]
         public void ValidRangeTest()
         {
-            string name = "TestSkill";
-            string details = "TestDetails";
             int rangeOfKnowledge = 3;
-            Skill skill = this.factory.CreateSkill(name, rangeOfKnowledge, details);
-            ICollection<ValidationResult> results = new List<ValidationResult>();
-            bool valid = SkillTest.Validate(skill, out results);
-            Assert.AreEqual(name, skill.Name);
-            Assert.AreEqual(details, skill.Details);
-            Assert.AreEqual(rangeOfKnowledge, skill.RangeOfKnowledge);
-            Assert.IsTrue(valid);
+            this.CreateAndAssertSkill(rangeOfKnowledge);
         }
 
         static bool Validate<T>(T obj, out ICollection<ValidationResult> results)
