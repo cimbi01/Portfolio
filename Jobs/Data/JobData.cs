@@ -12,7 +12,6 @@ namespace Jobs.Data
         {
             this.Name = name;
             this.Employer = employer;
-            this.StartTime = DateTime.Now;
         }
 
         public string Name { get; }
@@ -22,13 +21,12 @@ namespace Jobs.Data
         /// </summary>
         public string? Details { get; }
 
+        //TODO: End()
         // TODO: eventhandler -> set to false -> EndTime = DateTime.Now, null values needs to be initialized
         /// <summary>
-        /// True if the job is active. False if the job is done.
+        /// Start time of the job. Can be null, if not started yet.
         /// </summary>
-        public bool OnGoing { get; }
-
-        public DateTime StartTime { get; }
+        public DateTime? StartTime { get; protected set; }
 
         public Employer Employer { get; }
 
@@ -40,7 +38,7 @@ namespace Jobs.Data
         /// <summary>
         /// List of <see cref="Skill"/>s that are needed for this job.
         /// </summary>
-        public List<Skill> NeededSkills { get; set; } = new List<Skill>();
+        public List<Skill> NeededSkills { get; } = new List<Skill>();
 
         /// <summary>
         ///  Returned value will be 1 if all <see cref="Skill.RangeOfKnowledge"/> of <see cref="NeededSkills"/> are matching <paramref name="employee"/>s Skills.<br/>
@@ -85,6 +83,11 @@ namespace Jobs.Data
             }
             suitability = rangesSum / ranges.Count;
             return suitability;
+        }
+
+        public void Start()
+        {
+            this.StartTime = DateTime.Now;
         }
     }
 }
