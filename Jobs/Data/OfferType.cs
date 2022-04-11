@@ -7,8 +7,8 @@ namespace Jobs.Data
 {
     public enum OfferType
     {
-        Offer,
+        Offering,
         Application,
-        Advertise
+        Advertisement
     }
 }

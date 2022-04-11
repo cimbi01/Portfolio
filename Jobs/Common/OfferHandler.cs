@@ -43,7 +43,7 @@ namespace Jobs.Common
 
         public List<Employee> Employees { get; } = new List<Employee>();
         public List<Employer> Employers { get; } = new List<Employer>();
-        public List<JobOffer> JobOffers { get; set; }
+        public List<JobOffer> JobOffers { get; } = new List<JobOffer>();
 
         //TODO: implementation
         public void AcceptJobOffer(JobOffer jobOffer)
@@ -68,5 +68,7 @@ namespace Jobs.Common
         {
             throw new NotImplementedException();
         }
+
+        //TODO: Advertise job
     }
 }

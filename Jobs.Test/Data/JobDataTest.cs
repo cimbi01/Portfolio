@@ -1,7 +1,7 @@
 ﻿using Jobs.Common;
 using Jobs.Common.Factories;
 using Jobs.Data;
-using Jobs.Data.Exceptions;
+using Jobs.Exceptions;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using NUnit.Framework;

@@ -4,8 +4,10 @@ using Jobs.Data;
 using Jobs.Data.WorkingPerson;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
+using Jobs.Exceptions;
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -165,6 +167,80 @@ namespace Jobs.Test.Common.Factories
             JobData jobData = this.factory.CreateJobData(jobDataName, employer);
             Assert.AreEqual(employer, jobData.Employer);
             Assert.AreEqual(jobDataName, jobData.Name);
+        }
+
+        [TestCaseSource(typeof(NoMatchCases))]
+        public void CreateJobOfferNoEmployerMatchTest(OfferType offerType, JobData jobData, WorkingPerson offerer, WorkingPerson? receiver = null)
+        {
+            Assert.Throws<EmployerNotMatchException>(() => this.WorkingPersonFactory.CreateJobOffer(offerType, jobData, offerer, receiver));
+        }
+
+        [TestCaseSource(typeof(NotAuthorizedCases))]
+        public void CreateJobOfferNotAuthorizedTest(OfferType offerType, JobData jobData, WorkingPerson offerer, WorkingPerson? receiver = null)
+        {
+            Assert.Throws<NotAuthorizedException>(() => this.WorkingPersonFactory.CreateJobOffer(offerType, jobData, offerer, receiver));
+        }
+
+        [TestCaseSource(typeof(SuccesFulCases))]
+        public void CreateJobOfferSuccessfullyTest(OfferType offerType, JobData jobData, WorkingPerson offerer, WorkingPerson? receiver = null)
+        {
+            JobOffer jobOffer = this.WorkingPersonFactory.CreateJobOffer(offerType, jobData, offerer, receiver);
+            Assert.True(this.offerHandler.JobOffers.Contains(jobOffer));
+        }
+
+    }
+
+    class NoMatchCases : IEnumerable
+    {
+        private OfferHandleredFactory WorkingPersonFactory { get; } = new OfferHandleredFactory(new OfferHandler());
+        public IEnumerator GetEnumerator()
+        {
+            Employee ee = this.WorkingPersonFactory.CreateEmployee("");
+            Employer er = this.WorkingPersonFactory.CreateEmployer("");
+            JobData jobData = this.WorkingPersonFactory.CreateJobData("", this.WorkingPersonFactory.CreateEmployer(""));
+            yield return new object[] { OfferType.Advertisement, jobData, ee, er };
+            yield return new object[] { OfferType.Advertisement, jobData, er, ee };
+        }
+    }
+
+    class NotAuthorizedCases : IEnumerable
+    {
+        private OfferHandleredFactory WorkingPersonFactory { get; } = new OfferHandleredFactory(new OfferHandler());
+        public IEnumerator GetEnumerator()
+        {
+            Employee ee = this.WorkingPersonFactory.CreateEmployee("");
+            Employee ee2 = this.WorkingPersonFactory.CreateEmployee("");
+            Employer er = this.WorkingPersonFactory.CreateEmployer("");
+            Employer er2 = this.WorkingPersonFactory.CreateEmployer("");
+            JobData jobData = this.WorkingPersonFactory.CreateJobData("", er);
+            yield return new object[] { OfferType.Application, jobData, ee, ee2 };
+            yield return new object[] { OfferType.Application, jobData, ee, ee };
+
+            yield return new object[] { OfferType.Advertisement, jobData, ee, er };
+            yield return new object[] { OfferType.Offering, jobData, ee, er };
+
+            yield return new object[] { OfferType.Application, jobData, er, ee };
+            yield return new object[] { OfferType.Application, jobData, er2, er };
+
+            yield return new object[] { OfferType.Application, jobData, er, null };
+            yield return new object[] { OfferType.Offering, jobData, ee, null };
+            yield return new object[] { OfferType.Advertisement, jobData, ee, null };
+        }
+    }
+
+    class SuccesFulCases : IEnumerable
+    {
+
+        private OfferHandleredFactory WorkingPersonFactory { get; } = new OfferHandleredFactory(new OfferHandler());
+        public IEnumerator GetEnumerator()
+        {
+            Employee ee = this.WorkingPersonFactory.CreateEmployee("");
+            Employer er = this.WorkingPersonFactory.CreateEmployer("");
+            JobData jobData = this.WorkingPersonFactory.CreateJobData("", er);
+
+            yield return new object[] { OfferType.Application, jobData, ee, er };
+            yield return new object[] { OfferType.Offering, jobData, er, ee };
+            yield return new object[] { OfferType.Advertisement, jobData, er, null };
         }
     }
 }

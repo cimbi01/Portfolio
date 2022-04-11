@@ -1,4 +1,4 @@
-﻿using Jobs.Data.Exceptions;
+﻿using Jobs.Exceptions;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using System;

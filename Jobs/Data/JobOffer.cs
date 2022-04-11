@@ -4,7 +4,7 @@ namespace Jobs.Data
 {
     public class JobOffer
     {
-        public JobOffer(OfferType offerType, WorkingPerson.WorkingPerson offerer, JobData jobData, WorkingPerson.WorkingPerson? receiver = null)
+        public JobOffer(OfferType offerType, JobData jobData, WorkingPerson.WorkingPerson offerer, WorkingPerson.WorkingPerson? receiver = null)
         {
             this.OfferType = offerType;
             this.Offerer = offerer;
