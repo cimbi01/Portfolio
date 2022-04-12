@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Jobs.Exceptions;
+using System;
 
 namespace Jobs.Data
 {
     public class JobOffer
     {
+        private bool? accepted;
+
         public JobOffer(OfferType offerType, JobData jobData, WorkingPerson.WorkingPerson offerer, WorkingPerson.WorkingPerson? receiver = null)
         {
             this.OfferType = offerType;
@@ -26,10 +29,24 @@ namespace Jobs.Data
 
         public JobData JobData { get; }
 
-        //TODO: Set only once
+        //TODO: Test set only once
         /// <summary>
         /// True if accepted, false if declined, null if theres no feedback
         /// </summary>
-        public bool? Accepted { get; set; }
+        public bool? Accepted
+        {
+            get => accepted;
+            set
+            {
+                if(accepted == null)
+                {
+                    accepted = value;
+                }
+                else
+                {
+                    throw new AlreadySetException();
+                }
+            }
+        }
     }
 }

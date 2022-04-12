@@ -2,9 +2,11 @@
 using Jobs.Data;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
+using Jobs.Exceptions;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Jobs.Test.Common
@@ -35,6 +37,7 @@ namespace Jobs.Test.Common
         {
             Assert.IsTrue(jobOffer.Accepted);
             Assert.IsTrue(jobOffer.JobData.Employees.Contains(ee));
+            Assert.AreEqual(1, jobOffer.JobData.Employees.Count(employee => employee == ee));
         }
 
         [Test]
@@ -44,12 +47,22 @@ namespace Jobs.Test.Common
             this.offerHandler.AcceptJobOffer(application);
             this.AssertJobOffer(application);
         }
+
         [Test]
         public void AcceptJobOfferOfferingTest()
         {
             JobOffer application = this.CreateOffering();
             this.offerHandler.AcceptJobOffer(application);
             this.AssertJobOffer(application);
+        }
+
+        [Test]
+        public void AcceptJobOfferTwiceTest()
+        {
+            JobOffer application = this.CreateOffering();
+            this.offerHandler.AcceptJobOffer(application);
+            this.AssertJobOffer(application);
+            Assert.Throws<AlreadySetException>( () => this.offerHandler.AcceptJobOffer(application));
         }
     }
 }

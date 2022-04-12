@@ -41,6 +41,7 @@ namespace Jobs.Common.Factories
             return employer;
         }
 
+        //TODO: Refactor -> CreateJobOffering, CreateJobApplication, CreateJobAdvertisement
         /// <summary>
         /// Creates joboffer and adds it to <see cref="OfferHandler.JobOffers"/>
         /// </summary>
@@ -98,6 +99,8 @@ namespace Jobs.Common.Factories
             }
             JobOffer jobOffer = new JobOffer(offerType, jobData, offerer, receiver);
             this.OfferHandler.JobOffers.Add(jobOffer);
+            offerer?.OfferedJobOffers.Add(jobOffer);
+            receiver?.ReceivedJobOffers.Add(jobOffer);
             return jobOffer;
         }
     }

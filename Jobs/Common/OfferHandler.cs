@@ -1,4 +1,5 @@
-﻿using Jobs.Data;
+﻿using Jobs.Common.Factories;
+using Jobs.Data;
 using Jobs.Data.WorkingPerson;
 using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
@@ -11,12 +12,6 @@ namespace Jobs.Common
     public class OfferHandler
     {
         /*
-         * 2 út:
-         *      Employer -> JobOffer -> Offer -> accept / decline
-         *                              Advertisement -> Application
-         * OfferJob(JobOffer, From, To) ->  if From is Employee -> Application
-         *                                  else -> Offer
-         *                                  To.JobOffers.Add(JobOffer), From.JobOffers.Add(JobOffer)
          * AcceptJobOffer(JobOffer) -> To.JobOffers.Add(JobOffer) -> From.JobOffers.Add(JobOffer) -> JobOffer.Accepted = true
          * Decline(JobOffer) -> JobOffer.Accepted = false
          * 
@@ -44,50 +39,78 @@ namespace Jobs.Common
         public List<Employee> Employees { get; } = new List<Employee>();
         public List<Employer> Employers { get; } = new List<Employer>();
         public List<JobOffer> JobOffers { get; } = new List<JobOffer>();
+        protected OfferHandleredFactory Factory { get; }
 
+        public OfferHandler()
+        {
+            this.Factory = new OfferHandleredFactory(this);
+        }
+
+        //TODO: Refactor Code Clone
         /// <summary>
-        /// Adds Employee whos accepting to <see cref="JobOffer.JobData.Employees"/>
+        /// Adds Employee whos accepting - if not already exist - to <see cref="JobOffer.JobData.Employees"/> 
         /// Set <see cref="JobOffer.Accepted"/> to true
         /// </summary>
         /// <param name="jobOffer"></param>
         public void AcceptJobOffer(JobOffer jobOffer)
         {
             WorkingPerson receiver = jobOffer.Receiver;
-            // If employee accepts offering
-            if (receiver is Employee)
+            // If employee accepts offering and not exits in employees
+            if (receiver is Employee && !jobOffer.JobData.Employees.Contains((Employee)receiver))
             {
+                // add only once
                 jobOffer.JobData.Employees.Add((Employee)receiver);
             }
-            // If employer accepts application
-            else
+            // If employer accepts application and not exits in employees
+            else if (receiver is Employer && !jobOffer.JobData.Employees.Contains((Employee)jobOffer.Offerer))
             {
                 jobOffer.JobData.Employees.Add((Employee)jobOffer.Offerer);
             }
             jobOffer.Accepted = true;
         }
 
-        //TODO: implementation
+        //TODO: Refactor Code Clone
+        //TODO: Test
+        /// <summary>
+        /// Removes Employee whos declining - if  exist - from <see cref="JobOffer.JobData.Employees"/> 
+        /// Set <see cref="JobOffer.Accepted"/> to false
+        /// </summary>
+        /// <param name="jobOffer"></param>
         public void DeclineJobOffer(JobOffer jobOffer)
         {
-            throw new NotImplementedException();
+            WorkingPerson receiver = jobOffer.Receiver;
+            // If employee accepts offering
+            if (receiver is Employee && !jobOffer.JobData.Employees.Contains((Employee)receiver))
+            {
+                jobOffer.JobData.Employees.RemoveAll(employee => employee == (Employee)receiver);
+            }
+            // If employer accepts application
+            else if (receiver is Employer && !jobOffer.JobData.Employees.Contains((Employee)jobOffer.Offerer))
+            {
+                jobOffer.JobData.Employees.RemoveAll(employee => employee == (Employee)jobOffer.Offerer);
+            }
+            jobOffer.Accepted = false;
         }
 
-        //TODO: implementation
-        public void OfferJob(JobData jobData, Employer from, Employee to)
+        //TODO: Test
+        public JobOffer OfferJob(JobData jobData, Employer from, Employee to)
         {
-            throw new NotImplementedException();
+            JobOffer jobOffer =  this.Factory.CreateJobOffer(OfferType.Offering, jobData, from, to);
+            return jobOffer;
         }
 
-        //TODO: implementation
-        public void ApplyForJob(JobData jobData, Employee from, Employer to)
+        //TODO: Test
+        public JobOffer ApplyForJob(JobData jobData, Employee from, Employer to)
         {
-            throw new NotImplementedException();
+            JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Application, jobData, from, to);
+            return jobOffer;
         }
 
-        //TODO: implementation
-        public void AdvertiseJob(JobData jobData, Employee from)
+        //TODO: Test
+        public JobOffer AdvertiseJob(JobData jobData, Employee from)
         {
-            throw new NotImplementedException();
+            JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Advertisement, jobData, from);
+            return jobOffer;
         }
     }
 }

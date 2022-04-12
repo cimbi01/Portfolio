@@ -186,8 +186,12 @@ namespace Jobs.Test.Common.Factories
         {
             JobOffer jobOffer = this.WorkingPersonFactory.CreateJobOffer(offerType, jobData, offerer, receiver);
             Assert.True(this.offerHandler.JobOffers.Contains(jobOffer));
+            Assert.True(offerer?.OfferedJobOffers.Contains(jobOffer));
+            if(receiver != null)
+            { 
+                Assert.True(receiver.ReceivedJobOffers.Contains(jobOffer));
+            }
         }
-
     }
 
     class NoMatchCases : IEnumerable
