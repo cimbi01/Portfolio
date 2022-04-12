@@ -13,11 +13,7 @@ namespace MVC
     {
          /*
          * TODO: MVC:
-         * 
-         * AddSingleton<OfferHandler, OfferHandler)
-         * AddTransient<Factory, Factory>
-         * AddTransient<OfferHandleredFactory, OfferHandleredFactory>
-         * 
+         *  
          * Controllers:
          *      WorkingPerson
          *          Create (Employer / Employee)
