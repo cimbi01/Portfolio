@@ -66,7 +66,6 @@ namespace Jobs.Common
         }
 
         //TODO: Refactor Code Clone
-        //TODO: Test
         /// <summary>
         /// Removes Employee whos declining - if  exist - from <see cref="JobOffer.JobData.Employees"/> 
         /// Set <see cref="JobOffer.Accepted"/> to false
@@ -88,21 +87,18 @@ namespace Jobs.Common
             jobOffer.Accepted = false;
         }
 
-        //TODO: Test
         public JobOffer OfferJob(JobData jobData, Employer from, Employee to)
         {
             JobOffer jobOffer =  this.Factory.CreateJobOffer(OfferType.Offering, jobData, from, to);
             return jobOffer;
         }
 
-        //TODO: Test
         public JobOffer ApplyForJob(JobData jobData, Employee from, Employer to)
         {
             JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Application, jobData, from, to);
             return jobOffer;
         }
 
-        //TODO: Test
         public JobOffer AdvertiseJob(JobData jobData, Employee from)
         {
             JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Advertisement, jobData, from);

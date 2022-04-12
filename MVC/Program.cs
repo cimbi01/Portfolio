@@ -16,16 +16,20 @@ namespace MVC
         * 
         * Controllers:
         *      WorkingPerson
-        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability -> (Own) ReceivedJobOffers Accept/Decline
-        *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers -> (Own) ReceivedJobOffers Accept/Decline
-        *          Update -> Own Contact
+        *          Read  -> Advertisements (Employers) (Filter, Sort)
+        *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline
+        *          Read Update -> Own Contact
         *      Employee:
         *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
-        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline + Apply
+        *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
+        *          Read  -> Advertisements (Employers) (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> CalculateSuitability, Apply
         *      Employer:
         *          Create -> JobAdvertisement
         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
         *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers +-> JobOffer
+        *          
+        * TODO: Factory
+        * TODO: Tests
        */
 
         public static void Main(string[] args)

@@ -29,7 +29,6 @@ namespace Jobs.Data
 
         public JobData JobData { get; }
 
-        //TODO: Test set only once
         /// <summary>
         /// True if accepted, false if declined, null if theres no feedback
         /// </summary>

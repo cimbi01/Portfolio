@@ -5,7 +5,7 @@
     @using Jobs.Data.WorkingPerson;
     @model HomeViewModel
     @inject UserHandlerService UserHandlerService
-    string selectedUserNam = UserHandlerService.ActiveUser?.Contact.Name ?? "No selected User";
+    string selectedUserName = UserHandlerService.ActiveUser?.Contact.Name ?? "No selected User";
     ViewData["Title"] = "Home Page";
 }
 
@@ -86,9 +86,8 @@
                     </div>
                 }
                 <p>
-                    Selected User: @selectedUserNam
+                    Selected User: @selectedUserName
                 </p>
-                <a class="btn btn-primary" asp-action="ExitUser" asp-controller="Home" m>Exit User</a>
         </div>
     </div>
 </div>
