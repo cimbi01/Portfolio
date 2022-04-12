@@ -1,0 +1,34 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @using MVC.Services;
+    @model WorkingPersonViewModel
+    @inject UserHandlerService UserHandlerService
+    ViewData["Title"] = "WorkingPerson Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2 class="h2 text-center">Contact</h2>
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.Name)
+                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.Name, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.Name })
+                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.EmailAddress)
+                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.EmailAddress, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.EmailAddress })
+                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.EmailAddress)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.PhoneNumber)
+                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.PhoneNumber, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.PhoneNumber })
+                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.PhoneNumber)
+                </div>
+                <input id="Submit" type="submit" value="Update MyContact" asp-controller="WorkingPerson" asp-action="UpdateMyContact" class="btn btn-primary">
+            }
+        </div>
+    </div>
+</div>

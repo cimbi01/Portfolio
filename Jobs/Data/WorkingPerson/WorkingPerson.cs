@@ -25,7 +25,7 @@ namespace Jobs.Data.WorkingPerson
         }
         
         
-        public Contact Contact { get; }
+        public Contact Contact { get; set; }
 
         public List<JobOffer> ReceivedJobOffers { get; } = new List<JobOffer>();
         public List<JobOffer> OfferedJobOffers { get; } = new List<JobOffer>();
