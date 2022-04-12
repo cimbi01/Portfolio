@@ -11,23 +11,26 @@ namespace MVC
 {
     public class Program
     {
-         /*
-         * TODO: MVC:
-         *  
-         * Controllers:
-         *      WorkingPerson
-         *          Create (Employer / Employee)
-         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability -> (Own) ReceivedJobOffers Accept/Decline
-         *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers -> (Own) ReceivedJobOffers Accept/Decline
-         *          Update -> Own Contact
-         *      Employee:
-         *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
-         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline + Apply
-         *      Employer:
-         *          Create -> JobAdvertisement
-         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
-         *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers +-> JobOffer
-        */
+        /*
+        * TODO: MVC:
+        * 
+        * Controllers:
+        *      Home:
+        *          Create User(Employer / Employee)
+        *          Select User
+        *          Exit
+        *      WorkingPerson
+        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability -> (Own) ReceivedJobOffers Accept/Decline
+        *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers -> (Own) ReceivedJobOffers Accept/Decline
+        *          Update -> Own Contact
+        *      Employee:
+        *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
+        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline + Apply
+        *      Employer:
+        *          Create -> JobAdvertisement
+        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
+        *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers +-> JobOffer
+       */
 
         public static void Main(string[] args)
         {
