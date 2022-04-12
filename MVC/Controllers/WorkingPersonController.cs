@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jobs.Common;
 using Jobs.Common.Factories;
+using Jobs.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MVC.Models.ViewModels;
@@ -26,11 +27,22 @@ namespace MVC.Controllers
             this._userHandlerService = userHandlerService;
         }
 
-        public IActionResult MyContact()
+        private WorkingPersonViewModel InitializeWorkingPersonViewModel()
         {
             WorkingPersonViewModel workingPersonViewModel = new WorkingPersonViewModel();
             workingPersonViewModel.WorkingPerson = this._userHandlerService.ActiveUser;
-            return View(workingPersonViewModel);
+            workingPersonViewModel.Advertisements = this._offerHandler.JobOffers.Where(offer => offer.OfferType == OfferType.Advertisement).ToList();
+            return workingPersonViewModel;
+        }
+
+        public IActionResult MyContact()
+        {
+            return View(this.InitializeWorkingPersonViewModel());
+        }
+
+        public IActionResult Advertisements()
+        {
+            return View(this.InitializeWorkingPersonViewModel());
         }
 
         public IActionResult UpdateMyContact(WorkingPersonViewModel workingPersonViewModel)

@@ -47,7 +47,7 @@ namespace MVC.Models.ViewModels
             this.WorkingPerson = workingPerson;
         }
 
-        public List<JobOffer>? AllAdvertisements { get; set; }
+        public List<JobOffer>? Advertisements { get; set; }
         public List<JobOffer> JobOffers
         {
             get

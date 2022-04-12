@@ -1,0 +1,57 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @using Jobs.Data;
+    @using Jobs.Data.WorkingPerson.Employee;
+    @using MVC.Services;
+    @model WorkingPersonViewModel
+    @inject UserHandlerService UserHandlerService
+    ViewData["Title"] = "WorkingPerson Home Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">NeededSkills</th>
+                        <th scope="col">Offerer</th>
+                        <th scope="col">Employees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (JobOffer advertisement in Model.Advertisements)
+                    {
+                        <tr>
+                            <td>@advertisement.JobData.Name</td>
+                            <td>@advertisement.JobData.Details</td>
+                            <td>
+                                <ul>
+                                    @foreach (Skill skill in advertisement.JobData.NeededSkills)
+                                    {
+                                        <li>
+                                            @skill.Name : @skill.RangeOfKnowledge
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                            <td>@advertisement.JobData.Employer.Contact.Name</td>
+                            <td>
+                                <ul>
+                                    @foreach (Employee employee in advertisement.JobData.Employees)
+                                    {
+                                        <li>
+                                            @employee.Contact.Name
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

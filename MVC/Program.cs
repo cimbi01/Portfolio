@@ -18,7 +18,6 @@ namespace MVC
         *      WorkingPerson
         *          Read  -> Advertisements (Employers) (Filter, Sort)
         *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline
-        *          Read Update -> Own Contact
         *      Employee:
         *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
         *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
