@@ -32,6 +32,13 @@ namespace MVC.Controllers
             this._userHandlerService = userHandlerService;
         }
 
+        public IActionResult ExitUser(HomeViewModel homeViewModel)
+        {
+            this._userHandlerService.ActiveUser = null;
+            return View(nameof(Index), homeViewModel);
+        }
+
+
         [HttpPost]
         public IActionResult UseUser(HomeViewModel homeViewModel)
         {

@@ -10,8 +10,8 @@
 }
 
 <div class="container">
-    <div class="row">
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
+        <div class="justify-content-center">
             <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
         </div>
     </div>
@@ -63,31 +63,32 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <h2 class="h2">Select Employee/Employer</h2>
-            @using (Html.BeginForm("UseUser", "Home", FormMethod.Post))
-            {
-                <div class="form-group">
-                    <select id="userSelect" onchange="this.form.submit()" asp-for="@Model.SelectedUserName">
-                        <option value="" selected>No User Selected</option>
-                        @foreach (WorkingPerson workingPerson in UserHandlerService.WorkingPeople)
-                        {
-                            if (UserHandlerService.ActiveUser?.Contact.Name == workingPerson.Contact.Name)
+    <div class="row text-center">
+        <div class="col">
+                <h3 class="h3">Select Employee/Employer</h3>
+                @using (Html.BeginForm("UseUser", "Home", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <select id="userSelect" onchange="this.form.submit()" asp-for="@Model.SelectedUserName">
+                            <option value="" selected>No User Selected</option>
+                            @foreach (WorkingPerson workingPerson in UserHandlerService.WorkingPeople)
                             {
-                                <option value="@workingPerson.Contact.Name" selected>@workingPerson.Contact.Name</option>
+                                if (UserHandlerService.ActiveUser?.Contact.Name == workingPerson.Contact.Name)
+                                {
+                                    <option value="@workingPerson.Contact.Name" selected>@workingPerson.Contact.Name</option>
+                                }
+                                if (UserHandlerService.ActiveUser?.Contact.Name != workingPerson.Contact.Name)
+                                {
+                                    <option value="@workingPerson.Contact.Name">@workingPerson.Contact.Name</option>
+                                }
                             }
-                            if (UserHandlerService.ActiveUser?.Contact.Name != workingPerson.Contact.Name)
-                            {
-                                <option value="@workingPerson.Contact.Name">@workingPerson.Contact.Name</option>
-                            }
-                        }
-                    </select>
-                </div>
-            }
-            <p>
-            Selected User: @selectedUserNam
-            </p>
+                        </select>
+                    </div>
+                }
+                <p>
+                    Selected User: @selectedUserNam
+                </p>
+                <a class="btn btn-primary" asp-action="ExitUser" asp-controller="Home" m>Exit User</a>
         </div>
     </div>
 </div>

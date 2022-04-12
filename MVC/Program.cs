@@ -15,9 +15,6 @@ namespace MVC
         * TODO: MVC:
         * 
         * Controllers:
-        *      Home:
-        *           Index:
-        *              Quit User (button)
         *      WorkingPerson
         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability -> (Own) ReceivedJobOffers Accept/Decline
         *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers -> (Own) ReceivedJobOffers Accept/Decline
