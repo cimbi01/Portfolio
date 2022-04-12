@@ -1,5 +1,7 @@
 ﻿using Jobs.Common;
 using Jobs.Data.WorkingPerson;
+using Jobs.Data.WorkingPerson.Employee;
+using Jobs.Data.WorkingPerson.Employer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +11,11 @@ namespace MVC.Models.ViewModels
 {
     public class HomeViewModel
     {
-        private OfferHandler offerHandler;
-        public HomeViewModel(OfferHandler offerHandler)
+        public HomeViewModel()
         {
-            this.offerHandler = offerHandler;
+
         }
-        public WorkingPerson? CreatedUser { get; set; }
-        public List<WorkingPerson> WorkingPeople
-        {
-            get
-            {
-                List<WorkingPerson> workingPeople = new List<WorkingPerson>();
-                this.offerHandler.Employees.ForEach(emp => workingPeople.Add(emp));
-                this.offerHandler.Employers.ForEach(emp => workingPeople.Add(emp));
-                return workingPeople;
-            }
-        }
+        public Employee? CreatedEmployee { get; set; }
+        public Employer? CreatedEmployer { get; set; }
     }
 }

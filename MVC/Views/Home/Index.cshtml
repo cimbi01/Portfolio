@@ -1,11 +1,64 @@
-﻿@using MVC.Models.ViewModels;
-@model HomeViewModel;
- 
+﻿
 @{
+    @using MVC.Models.ViewModels;
+    @using MVC.Services;
+    @model HomeViewModel
+    @inject UserHandlerService UserHandlerService
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployee.Contact.Name)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployee.Contact.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployee.Contact.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployee.Contact.EmailAddress)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployee.Contact.EmailAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployee.Contact.EmailAddress)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployee.Contact.PhoneNumber)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployee.Contact.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployee.Contact.PhoneNumber)
+                </div>
+
+                <input id="Submit" type="submit" value="Create Employee" asp-controller="Home" asp-action="CreateEmployee" class="btn btn-primary">
+            }
+        </div>
+        <div class="col-6">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployer.Contact.Name)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployer.Contact.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployer.Contact.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployer.Contact.EmailAddress)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployer.Contact.EmailAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployer.Contact.EmailAddress)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(Model => Model.CreatedEmployer.Contact.PhoneNumber)
+                    @Html.TextBoxFor(Model => Model.CreatedEmployer.Contact.PhoneNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(Model => Model.CreatedEmployer.Contact.PhoneNumber)
+                </div>
+
+                <input id="Submit" type="submit" value="Create Employee" asp-controller="Home" asp-action="CreateEmployer" class="btn btn-primary">
+            }
+        </div>
+    </div>
 </div>

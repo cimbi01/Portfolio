@@ -12,6 +12,16 @@ namespace MVC.Services
 {
     public class UserHandlerService
     {
+        public List<WorkingPerson> WorkingPeople
+        {
+            get
+            {
+                List<WorkingPerson> workingPeople = new List<WorkingPerson>();
+                this.OfferHandler.Employees.ForEach(emp => workingPeople.Add(emp));
+                this.OfferHandler.Employers.ForEach(emp => workingPeople.Add(emp));
+                return workingPeople;
+            }
+        }
         /// <summary>
         /// Currently active (selected) user
         /// </summary>
