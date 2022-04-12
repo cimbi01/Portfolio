@@ -12,7 +12,6 @@ namespace Jobs.Common
     public class OfferHandler
     {
         /*
-         *                    
          * TODO: Identity:
          *      Users
          *      Login
@@ -99,7 +98,7 @@ namespace Jobs.Common
             return jobOffer;
         }
 
-        public JobOffer AdvertiseJob(JobData jobData, Employee from)
+        public JobOffer AdvertiseJob(JobData jobData, Employer from)
         {
             JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Advertisement, jobData, from);
             return jobOffer;

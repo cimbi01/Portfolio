@@ -20,7 +20,7 @@ namespace Jobs.Data
         /// <summary>
         /// Details of a job. Can be null of Employer giving no details about the job.
         /// </summary>
-        public string? Details { get; }
+        public string? Details { get; set; }
 
         /// <summary>
         /// Start time of the job. Can be null, if not started yet.

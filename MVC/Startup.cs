@@ -30,7 +30,7 @@ namespace MVC
             services.AddSingleton<OfferHandler, OfferHandler>();
             services.AddSingleton<UserHandlerService, UserHandlerService>();
             services.AddTransient<Factory, Factory>();
-            services.AddTransient<OfferHandleredFactory, OfferHandleredFactory>();
+            services.AddTransient<OfferHandleredFactory, SeededOfferHandleredFactory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

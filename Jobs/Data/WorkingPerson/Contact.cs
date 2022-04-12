@@ -15,6 +15,7 @@ namespace Jobs.Data.WorkingPerson
             this.PhoneNumber = phoneNumber;
         }
 
+        //TODO: Annotation for name not taken
         [Required(ErrorMessage ="Required")]
         public string Name { get; set; }
 
