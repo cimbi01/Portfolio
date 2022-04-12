@@ -23,6 +23,11 @@ namespace Jobs.Common.Factories
             return reference;
         }
 
+        public Contact CreateContact()
+        {
+            return new Contact();
+        }
+
         public Contact CreateContact(string name, string? emailAddress = null, string? phoneNumber = null)
         {
             Contact contact = new Contact(name, emailAddress, phoneNumber);

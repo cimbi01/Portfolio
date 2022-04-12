@@ -16,6 +16,29 @@ namespace Jobs.Common.Factories
         {
             this.OfferHandler = offerHandler;
         }
+        
+        private Employer HandleCreatedEmployer(Employer employer)
+        {
+            this.OfferHandler.Employers.Add(employer);
+            return employer;
+        }
+
+        private Employee HandleCreatedEmployee(Employee employee)
+        {
+            this.OfferHandler.Employees.Add(employee);
+            return employee;
+        }
+
+        /// <summary>
+        /// Creates employee and adds it to <see cref="OfferHandler.Employees"/>
+        /// </summary>
+        /// <param name="name">Name of the employee</param>
+        /// <returns></returns>
+        public Employee CreateEmployee(Employee employee)
+        {
+            Employee createdEmployee = new Employee(employee);
+            return this.HandleCreatedEmployee(createdEmployee);
+        }
 
         /// <summary>
         /// Creates employee and adds it to <see cref="OfferHandler.Employees"/>
@@ -25,8 +48,18 @@ namespace Jobs.Common.Factories
         public Employee CreateEmployee(string name)
         {
             Employee employee = new Employee(name);
-            this.OfferHandler.Employees.Add(employee);
-            return employee;
+            return this.HandleCreatedEmployee(employee);
+        }
+
+        /// <summary>
+        /// Creates employer and adds it to <see cref="OfferHandler.Employers"/>
+        /// </summary>
+        /// <param name="name">Name of the employer</param>
+        /// <returns></returns>
+        public Employer CreateEmployer(Employer employer)
+        {
+            Employer createdEmployer = new Employer(employer);
+            return this.HandleCreatedEmployer(createdEmployer);
         }
 
         /// <summary>
@@ -37,8 +70,7 @@ namespace Jobs.Common.Factories
         public Employer CreateEmployer(string name)
         {
             Employer employer = new Employer(name);
-            this.OfferHandler.Employers.Add(employer);
-            return employer;
+            return this.HandleCreatedEmployer(employer);
         }
 
         //TODO: Refactor -> CreateJobOffering, CreateJobApplication, CreateJobAdvertisement
