@@ -23,9 +23,9 @@ namespace MVC.Services
             }
         }
         /// <summary>
-        /// Currently active (selected) user
+        /// Currently active (selected) user. Can be null of no ActiveUser is selected
         /// </summary>
-        public WorkingPerson ActiveUser { get; set; }
+        public WorkingPerson? ActiveUser { get; set; }
         public bool ActiveUserIsEmployee()
         {
             return this.ActiveUser is Employee;

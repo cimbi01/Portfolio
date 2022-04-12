@@ -17,8 +17,6 @@ namespace MVC
         * Controllers:
         *      Home:
         *           Index:
-        *              Create User(Employer / Employee) (form)
-        *              Select User (form, dropdown)
         *              Quit User (button)
         *      WorkingPerson
         *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability -> (Own) ReceivedJobOffers Accept/Decline

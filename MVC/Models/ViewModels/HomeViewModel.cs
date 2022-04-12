@@ -17,5 +17,6 @@ namespace MVC.Models.ViewModels
         }
         public Employee? CreatedEmployee { get; set; }
         public Employer? CreatedEmployer { get; set; }
+        public string? SelectedUserName { get; set; }
     }
 }
