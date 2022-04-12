@@ -10,26 +10,41 @@ namespace Jobs.Common.Factories
     {
         private const int NUMBEROFEMPLOYEES = 5;
         private const int NUMBEROFEMPLOYERS = 5;
-
+        private const int NUMBEROFJOBDATAS= 5;
+        private const int MAXNUMBEROFSKILLS = 10;
+        private Random random = new Random();
         private static bool seeded = false;
+        private List<Employer> employers;
 
         public SeededOfferHandleredFactory(OfferHandler offerHandler) : base(offerHandler)
         {
             lock(this)
-            { 
+            {
                 if(!seeded)
                 {
+                    this.employers = this.OfferHandler.Employers;
                     this.SeedData();
                     seeded = true;
                 }
             }
+        }
+
+        private List<Skill> GenerateSkills()
+        {
+            //TODO: NeededSkills, HadSkill -> List -> Dictionary
+            List<Skill> skills = new List<Skill>();
+            for (int j = 0; j < random.Next(MAXNUMBEROFSKILLS); j++)
+            {
+                skills.Add(this.CreateSkill(Convert.ToString(random.Next()), random.Next(Skill.MinimumRangeOfKnowledge, Skill.MaximumRangeOfKnowledge)));
+            }
+            return skills;
         }
         public void SeedData()
         {
             for (int i = 0; i < NUMBEROFEMPLOYEES; i++)
             {
                 string name = "Employee" + Convert.ToString(i);
-                this.CreateEmployee(name);
+                this.CreateEmployee(name).ProfessionData.Skills.AddRange(this.GenerateSkills());
             }
 
             for (int i = 0; i < NUMBEROFEMPLOYERS; i++)
@@ -38,24 +53,18 @@ namespace Jobs.Common.Factories
                 this.CreateEmployer(name);
             }
 
-            List<Employer> employers = this.OfferHandler.Employers;
-            Employer employer = employers[0];
-
-            for (int i = 0; i < length; i++)
+            for (int i = 0; i < NUMBEROFJOBDATAS; i++)
             {
-                JobData jobdata1 = this.CreateJobData("jobData1", employer);
-                jobdata1.Details = "Details1";
-                //TODO: NeededSkills, HadSkill -> List -> Dictionary
-                jobdata1.NeededSkills.AddRange(
-                    new List<Skill>()
-                    {
-                    this.CreateSkill("A", 3),
-                    this.CreateSkill("B", 4),
-                    this.CreateSkill("C", 2),
-                    this.CreateSkill("D", 1),
-                    });
+                int employerIndex = random.Next(0, NUMBEROFEMPLOYERS - 1);
+                Employer employer = employers[employerIndex];
+                string name = "JobData" + Convert.ToString(i);
+                JobData jobdata1 = this.CreateJobData(name, employer);
+                jobdata1.Details = "Details" + Convert.ToString(i);
+                jobdata1.NeededSkills.AddRange(this.GenerateSkills());
                 this.OfferHandler.AdvertiseJob(jobdata1, employer);
             }
+
+
         }
     }
 }
