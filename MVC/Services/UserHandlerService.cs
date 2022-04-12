@@ -2,6 +2,7 @@
 using Jobs.Common.Factories;
 using Jobs.Data.WorkingPerson;
 using Jobs.Data.WorkingPerson.Employee;
+using Jobs.Data.WorkingPerson.Employer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
