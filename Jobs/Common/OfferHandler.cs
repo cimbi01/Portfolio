@@ -12,28 +12,24 @@ namespace Jobs.Common
     public class OfferHandler
     {
         /*
-         * AcceptJobOffer(JobOffer) -> To.JobOffers.Add(JobOffer) -> From.JobOffers.Add(JobOffer) -> JobOffer.Accepted = true
-         * Decline(JobOffer) -> JobOffer.Accepted = false
-         * 
-         * TODO: MVC:
-         * 
-         * TODO: Notifications:
-         *      NeededData -> Notification for Employees/Employers for needed data
-         *      Notifications (List Of Notifications):
-         *          Target (WorkingPerson)
-         *          Title (string)
-         *          Details (string)
-         *          ActionToSolve? (Action)
-         * 
-         * TODO: EntityFrameWork
-         *      TODO: Project:Data -> Data Context, Repositories, Entity FW
-         * 
+         *                    
          * TODO: Identity:
          *      Users
          *      Login
          *      Roles:
          *          Employee
          *          Employer
+         * 
+         * TODO: Notifications:
+         *      NeededData -> Notification for Employees/Employers for needed data
+         *      Notifications (List Of Notifications):
+         *          Target (WorkingPerson)
+         *          Title (string)
+         *          Details (string?)
+         *          ActionToSolve (Action?)
+         * 
+         * TODO: EF Core
+         *      TODO: Project:Data -> Data Context, Repositories, Entity FW
          */
 
         public List<Employee> Employees { get; } = new List<Employee>();
