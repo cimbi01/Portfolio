@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MVC.Services;
 
 namespace MVC
 {
@@ -27,6 +28,7 @@ namespace MVC
         {
             services.AddControllersWithViews();
             services.AddSingleton<OfferHandler, OfferHandler>();
+            services.AddSingleton<UserHandlerService, UserHandlerService>();
             services.AddTransient<Factory, Factory>();
             services.AddTransient<OfferHandleredFactory, OfferHandleredFactory>();
         }
