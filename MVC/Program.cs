@@ -16,13 +16,16 @@ namespace MVC
         * 
         * Controllers:
         *      Employee:
-        *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
-        *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
-        *          Read  -> Advertisements (Employers) (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> CalculateSuitability, Apply
+        *          Skills List -> Read-Update / Create
+        *          References List -> Read-Update / Create
+        *          Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
+        *          Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply
         *      Employer:
         *          Create -> JobAdvertisement
-        *          Read -> Employers/Own JobOffers (Filter, Sort, Etc.) -> CalculateSuitability, (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
-        *          Read -> Employees/Own Contact, ReceivedJobOffers, OfferedJobOffers +-> JobOffer
+        *          Read -> Own JobOffers -> (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
+        *          Read -> Employees ProfessionData -> JobOffer
+        *
+        *   Decorator -> RenderView -> JS -> add ability
         *          
         * TODO: Factory
         * TODO: Tests

@@ -7,16 +7,22 @@ namespace Jobs.Data
         public const int MinimumRangeOfKnowledge = 0;
         public const int MaximumRangeOfKnowledge = 5;
 
+        [Required]
         //TODO: Should be predefined
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Details about the skill. Can be null.
         /// </summary>
-        public string? Details { get; }
+        public string? Details { get; set; }
 
+        [Required]
         [Range(MinimumRangeOfKnowledge, MaximumRangeOfKnowledge)]
-        public int RangeOfKnowledge { get; }
+        public int RangeOfKnowledge { get; set; }
+        public Skill()
+        {
+
+        }
 
         public Skill(string name, int rangeOfKnowledge, string? details = null)
         {

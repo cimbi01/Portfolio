@@ -12,6 +12,10 @@ namespace MVC.Services
 {
     public class UserHandlerService
     {
+        public Employee ActiveEmployee
+        {
+            get => (Employee)this.ActiveUser;
+        }
         /// <summary>
         /// Currently active (selected) user. Can be null of no ActiveUser is selected
         /// </summary>

@@ -48,6 +48,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-action="MyJobOffers" asp-controller="WorkingPerson">MyJobOffers</a>
                             </li>
+                            if (UserHandlerService.ActiveUserIsEmployee())
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="MySkills" asp-controller="Employee">MySkills</a>
+                                </li>
+                            }
                         }
                     </ul>
                 </div>

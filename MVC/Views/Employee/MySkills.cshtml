@@ -1,0 +1,48 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @using Jobs.Data;
+    @using Jobs.Data.WorkingPerson.Employee;
+    @using MVC.Services;
+    @model EmployeeViewModel
+    @inject UserHandlerService UserHandlerService
+    ViewData["Title"] = "My Skills";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">RangeOfKnowledge</th>
+                        <th scope="col">MinimumRangeOfKnowledge</th>
+                        <th scope="col">MaximumRangeOfKnowledge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Skill skill in Model.ProfessionData.Skills)
+                    {
+                        <tr class="form-group">
+                            <td>
+                                @Html.DisplayTextFor(Model => skill.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayTextFor(model => skill.Details)
+                            </td>
+                            <td>
+                                @Html.DisplayTextFor(model => skill.RangeOfKnowledge)
+                            </td>
+                            <td>@Skill.MinimumRangeOfKnowledge </td>
+                            <td>@Skill.MaximumRangeOfKnowledge </td>
+                            <td>
+                                <a asp-route-SelectedSkillName="@skill.Name" asp-action="EditMySkill" asp-controller="Employee" class="btn btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,15 @@ namespace MVC.Models.ViewModels
         public List<JobOffer>? ManagedAdvertisements { get; set; }
         public List<JobOffer>? ManagedJobOffers{ get; set; }
         public string? SelectedJobDataName { get; set; }
+        public WorkingPersonViewModel(WorkingPersonViewModel workingPersonViewModel)
+        {
+            this.Ascending = workingPersonViewModel.Ascending;
+            this.OrderString = workingPersonViewModel.OrderString;
+            this.Contact = workingPersonViewModel.Contact;
+            this.ManagedAdvertisements = workingPersonViewModel.ManagedAdvertisements;
+            this.ManagedJobOffers = workingPersonViewModel.ManagedJobOffers;
+            this.SelectedJobDataName = workingPersonViewModel.SelectedJobDataName;
+        }
 
         public WorkingPersonViewModel()
         {

@@ -14,10 +14,10 @@ namespace MVC.Controllers
 {
     public class WorkingPersonController : Controller
     {
-        private readonly ILogger<WorkingPersonController> _logger;
-        private readonly OfferHandler _offerHandler;
-        private readonly OfferHandleredFactory _offerHandleredFactory;
-        private readonly UserHandlerService _userHandlerService;
+        protected readonly ILogger<WorkingPersonController> _logger;
+        protected readonly OfferHandler _offerHandler;
+        protected readonly OfferHandleredFactory _offerHandleredFactory;
+        protected readonly UserHandlerService _userHandlerService;
 
         public WorkingPersonController(ILogger<WorkingPersonController> logger, OfferHandler offerHandler, OfferHandleredFactory offerHandleredFactory, UserHandlerService userHandlerService)
         {
@@ -27,14 +27,14 @@ namespace MVC.Controllers
             this._userHandlerService = userHandlerService;
         }
 
-        private WorkingPersonViewModel InitializeWorkingPersonViewModel()
+        protected WorkingPersonViewModel InitializeWorkingPersonViewModel()
         {
             WorkingPersonViewModel model = new WorkingPersonViewModel();
             model = this.InitializeWorkingPersonViewModel(model);
             return model;
         }
 
-        private WorkingPersonViewModel InitializeWorkingPersonViewModel(WorkingPersonViewModel model, bool ContactUpdate = true)
+        protected WorkingPersonViewModel InitializeWorkingPersonViewModel(WorkingPersonViewModel model, bool ContactUpdate = true)
         {
             model.ManagedAdvertisements = this._offerHandler.Advertisements;
             model.ManagedJobOffers = this._offerHandler.GetJobOffers(this._userHandlerService.ActiveUser);

@@ -1,0 +1,33 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @model EmployeeViewModel
+    ViewData["Title"] = "Edit Skill";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm(FormMethod.Get))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Skill.Name)
+                    @Html.DisplayTextFor(model => model.Skill.Name)
+                    @Html.HiddenFor(model => model.Skill.Name)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Skill.Details)
+                    @Html.TextBoxFor(model => model.Skill.Details, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Skill.Name)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Skill.RangeOfKnowledge)
+                    @Html.TextBoxFor(model => model.Skill.RangeOfKnowledge, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Skill.RangeOfKnowledge)
+                </div>
+                <input id="Submit" type="submit" value="Update" asp-controller="Employee" asp-action="UpdateMySkill" class="btn btn-primary">
+            }
+            </div>
+        </div>
+</div>
