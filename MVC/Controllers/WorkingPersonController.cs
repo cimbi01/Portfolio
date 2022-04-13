@@ -123,7 +123,7 @@ namespace MVC.Controllers
             bool valid = this.TryValidateModel(workingPersonViewModel.SelectedJobDataName, nameof(workingPersonViewModel.SelectedJobDataName));
             if (valid)
             {
-                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName);
+                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName && offer.OfferType != OfferType.Advertisement);
                 this._offerHandler.AcceptJobOffer(jobOffer);
             }
             return View("MyJobOffers", workingPersonViewModel);
@@ -135,7 +135,7 @@ namespace MVC.Controllers
             bool valid = this.TryValidateModel(workingPersonViewModel.SelectedJobDataName, nameof(workingPersonViewModel.SelectedJobDataName));
             if (valid)
             {
-                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName);
+                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName && offer.OfferType != OfferType.Advertisement);
                 this._offerHandler.DeclineJobOffer(jobOffer);
             }
             return View("MyJobOffers", workingPersonViewModel);

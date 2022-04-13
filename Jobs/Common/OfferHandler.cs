@@ -13,6 +13,7 @@ namespace Jobs.Common
     public class OfferHandler
     {
         /*
+         * TODO: Equality check -> private Id
          * TODO: Identity:
          *      Users
          *      Login
@@ -43,6 +44,7 @@ namespace Jobs.Common
         {
             get => this.JobOffers.Where(offer => offer.OfferType == OfferType.Advertisement).ToList();
         }
+
         public List<WorkingPerson> WorkingPeople
         {
             get
@@ -80,7 +82,7 @@ namespace Jobs.Common
             }
             // If employer accepts application and not exits in employees
             else if (receiver is Employer && !jobOffer.JobData.Employees.Contains((Employee)jobOffer.Offerer))
-            {
+            {   
                 jobOffer.JobData.Employees.Add((Employee)jobOffer.Offerer);
             }
             jobOffer.Accepted = true;
@@ -114,9 +116,10 @@ namespace Jobs.Common
             return jobOffer;
         }
 
-        public JobOffer ApplyForJob(JobData jobData, Employee from, Employer to)
+        //TODO: throws exception for applying a job thats jobdata.employees contains employee
+        public JobOffer ApplyForJob(JobData jobData, Employee from)
         {
-            JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Application, jobData, from, to);
+            JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Application, jobData, from, jobData.Employer);
             return jobOffer;
         }
 

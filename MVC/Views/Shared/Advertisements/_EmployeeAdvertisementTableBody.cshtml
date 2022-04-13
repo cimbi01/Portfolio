@@ -1,6 +1,10 @@
 ﻿@{
+    @using MVC.Services;
+    @using MVC.Models.ViewModels;
     @using Jobs.Data;
     @using Jobs.Data.WorkingPerson.Employee;
+    @inject UserHandlerService UserHandlerService
+    @model WorkingPersonViewModel
 }
 
 @foreach (JobOffer advertisement in Model.ManagedAdvertisements)
@@ -28,6 +32,24 @@
                     </li>
                 }
             </ul>
+        </td>
+        <td>
+            @advertisement.JobData.CalculateSuitability(UserHandlerService.ActiveEmployee)
+        </td>
+        <td>
+            @*
+                Job not already taken
+                And has no unhandled offering for this job
+            *@
+            @if (!advertisement.JobData.Employees.Contains(UserHandlerService.ActiveEmployee)
+            && !UserHandlerService.ActiveEmployee.OfferedJobOffers.Any(offer => offer.JobData.Name == advertisement.JobData.Name && offer.Accepted == null))
+            {
+            <a asp-controller="Employee" asp-action="ApplyForJob" asp-route-JobNameForApplication="@advertisement.JobData.Name">Apply for job</a>
+            }
+            else
+            {
+            <p>Already in Employees or applied for job</p>
+            }
         </td>
     </tr>
 }
