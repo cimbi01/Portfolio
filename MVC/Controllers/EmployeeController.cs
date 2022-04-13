@@ -116,9 +116,16 @@ namespace MVC.Controllers
             return View("MyReferences", employeeViewModel);
         }
 
+        public override IActionResult Advertisements()
+        {
+            EmployeeViewModel employeeViewModel = this.InitializeEmployeeViewModel();
+            base.Advertisements();
+            return View(employeeViewModel);
+        }
+
         /*
          * TODO: Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
-         * TODO: Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply        
+         * TODO: Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply -> ViewComponennt
          */
     }
 }

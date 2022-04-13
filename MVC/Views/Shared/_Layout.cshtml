@@ -43,9 +43,6 @@
                                 <a class="nav-link text-dark" asp-action="MyContact" asp-controller="WorkingPerson">MyContact</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-action="Advertisements" asp-controller="WorkingPerson">Advertisements</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-action="MyJobOffers" asp-controller="WorkingPerson">MyJobOffers</a>
                             </li>
                             if (UserHandlerService.ActiveUserIsEmployee())
@@ -55,6 +52,15 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-action="MyReferences" asp-controller="Employee">MyReferences</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Advertisements" asp-controller="Employee">Advertisements</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="Advertisements" asp-controller="WorkingPerson">Advertisements</a>
                                 </li>
                             }
                         }

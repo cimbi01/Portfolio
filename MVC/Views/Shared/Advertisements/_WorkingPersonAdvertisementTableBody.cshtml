@@ -1,0 +1,33 @@
+﻿@{
+    @using Jobs.Data;
+    @using Jobs.Data.WorkingPerson.Employee;
+}
+
+@foreach (JobOffer advertisement in Model.ManagedAdvertisements)
+{
+    <tr>
+        <td>@advertisement.JobData.Name</td>
+        <td>@advertisement.JobData.Details</td>
+        <td>
+            <ul>
+            @foreach (Skill skill in advertisement.JobData.NeededSkills)
+            {
+                <li>
+                    @skill.Name : @skill.RangeOfKnowledge
+                </li>
+            }
+            </ul>
+        </td>
+        <td>@advertisement.JobData.Employer.Contact.Name</td>
+        <td>
+            <ul>
+            @foreach (Employee employee in advertisement.JobData.Employees)
+            {
+                <li>
+                    @employee.Contact.Name
+                </li>
+            }
+            </ul>
+        </td>
+    </tr>
+}

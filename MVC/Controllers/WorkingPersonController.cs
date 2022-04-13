@@ -50,7 +50,7 @@ namespace MVC.Controllers
             return View(this.InitializeWorkingPersonViewModel());
         }
 
-        public IActionResult Advertisements()
+        public virtual IActionResult Advertisements()
         {
             return View(this.InitializeWorkingPersonViewModel());
         }
@@ -78,6 +78,7 @@ namespace MVC.Controllers
             bool valid = this.TryValidateModel(workingPersonViewModel.OrderString, nameof(workingPersonViewModel.OrderString));
             if (valid)
             {
+                //TODO: Refactor Code Clones
                 if(workingPersonViewModel.Ascending)
                 {
                     switch(workingPersonViewModel.OrderString)

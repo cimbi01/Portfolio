@@ -1,0 +1,69 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @using Jobs.Data;
+    @using Jobs.Data.WorkingPerson.Employee;
+    @using MVC.Services;
+    @using Microsoft.AspNetCore.Html
+    @using Microsoft.AspNetCore.Mvc.Rendering
+    @model WorkingPersonViewModel
+    @inject UserHandlerService UserHandlerService
+    ViewData["Title"] = "Advertisements";
+
+    @*
+        Partial View Setups
+        //TODO: Builder
+    *@
+
+    string prefix = "~/Views/Shared/Advertisements/";
+    string tableHeaderPostfix = "AdvertisementTableHeader.cshtml";
+    string tableBodyPostfix = "AdvertisementTableBody.cshtml";
+    string employeePrefix = "_Employee";
+    string workingPersonPrefix = "_WorkingPerson";
+
+    string tableHeaderPath = prefix + workingPersonPrefix + tableHeaderPostfix;
+    string tableBodyPath = prefix + workingPersonPrefix + tableBodyPostfix;
+    @if (Model is EmployeeViewModel)
+    {
+        tableHeaderPath = prefix + employeePrefix + tableHeaderPostfix;
+        tableBodyPath = prefix + employeePrefix + tableBodyPostfix;
+    }
+    var tableBody = await Html.PartialAsync(tableBodyPath, Model);
+    var tableHeader = await Html.PartialAsync(tableHeaderPath, Model);
+
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @using (Html.BeginForm("OrderAdvertisements", "WorkingPerson", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.OrderString)
+                    <select id="orderSelect" onchange="this.form.submit()" asp-for="@Model.OrderString" class="form-control .d-inline-flex">
+                        <option value="Name">Name</option>
+                        <option value="Details">Details</option>
+                        <option value="Offerer">Offerer</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.OrderString)
+                </div>
+                <div class="form-check">
+                    @Html.LabelFor(model => model.Ascending)
+                    @Html.CheckBoxFor(model => model.Ascending, new { @class = "form-check-input", @onchange = "this.form.submit()" })
+                    @Html.ValidationMessageFor(model => model.Ascending)
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <thead>
+                    @tableHeader
+                </thead>
+                <tbody>
+                    @tableBody
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

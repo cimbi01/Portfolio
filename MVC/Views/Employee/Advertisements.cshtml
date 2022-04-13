@@ -1,7 +1,7 @@
 ﻿@{
     @using MVC.Models.ViewModels;
     @using MVC.Services;
-    @model WorkingPersonViewModel
+    @model EmployeeViewModel
     @inject UserHandlerService UserHandlerService
     ViewData["Title"] = "Advertisements";
     await Html.RenderPartialAsync("~/Views/Shared/Advertisements/Advertisements.cshtml", Model);
