@@ -38,7 +38,8 @@ namespace Jobs.Common.Factories
             List<Skill> skills = new List<Skill>();
             for (int j = 0; j < random.Next(MAXNUMBEROFSKILLS); j++)
             {
-                skills.Add(this.CreateSkill(Convert.ToString(random.Next()), random.Next(Skill.MinimumRangeOfKnowledge, Skill.MaximumRangeOfKnowledge)));
+                string details = "details" + Convert.ToString(j);
+                skills.Add(this.CreateSkill(Convert.ToString(random.Next()), random.Next(Skill.MinimumRangeOfKnowledge, Skill.MaximumRangeOfKnowledge), details));
             }
             return skills;
         }
@@ -67,16 +68,30 @@ namespace Jobs.Common.Factories
                 JobData jobdata1 = this.CreateJobData(name, employer);
                 jobdata1.Details = "Details" + Convert.ToString(i);
                 jobdata1.NeededSkills.AddRange(this.GenerateSkills());
+                JobOffer jobOffer = null;
                 switch (offerTypeNumber)
                 {
                     case 0:
-                        this.OfferHandler.OfferJob(jobdata1, employer, employee);
+                        jobOffer = this.OfferHandler.OfferJob(jobdata1, employer, employee);
                         break;
                     case 1:
-                        this.OfferHandler.ApplyForJob(jobdata1, employee, employer);
+                        jobOffer = this.OfferHandler.ApplyForJob(jobdata1, employee, employer);
                         break;
                     case 2:
-                        this.OfferHandler.AdvertiseJob(jobdata1, employer);
+                        jobOffer = this.OfferHandler.AdvertiseJob(jobdata1, employer);
+                        break;
+                }
+                int acceptTypeNumber = random.Next(0, 3);
+                switch (acceptTypeNumber)
+                {
+                    case 0:
+                        this.OfferHandler.AcceptJobOffer(jobOffer);
+                        break;
+                    case 1:
+                        this.OfferHandler.DeclineJobOffer(jobOffer);
+                        break;
+                    case 2:
+                        // (Not Accept, Not Decline)
                         break;
                 }
             }
