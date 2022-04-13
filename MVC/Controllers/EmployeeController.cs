@@ -38,7 +38,26 @@ namespace MVC.Controllers
         public IActionResult EditMySkill(EmployeeViewModel employeeViewModel)
         {
             employeeViewModel.Skill = this._userHandlerService.ActiveEmployee.ProfessionData.Skills.First(skill => skill.Name == employeeViewModel.SelectedSkillName);
-            return View(employeeViewModel);
+            employeeViewModel.EditSkill = true;
+            return View("EditMySkill", employeeViewModel);
+        }
+
+        public IActionResult CreateMySkillEmpty()
+        {
+            EmployeeViewModel employeeViewModel = this.InitializeEmployeeViewModel();
+            employeeViewModel.EditSkill = false;
+            return View("EditMySkill", employeeViewModel);
+        }
+
+        public IActionResult CreateMySkill(EmployeeViewModel employeeViewModel)
+        {
+            bool valid = this.TryValidateModel(employeeViewModel.Skill, nameof(employeeViewModel.Skill));
+            if (valid)
+            {
+                this._userHandlerService.ActiveEmployee.ProfessionData.Skills.Add(employeeViewModel.Skill);
+            }
+            employeeViewModel = this.InitializeEmployeeViewModel(employeeViewModel);
+            return View("MySkills", employeeViewModel);
         }
 
         public IActionResult UpdateMySkill(EmployeeViewModel employeeViewModel)
@@ -54,7 +73,6 @@ namespace MVC.Controllers
         }
 
         /*
-         * TODO: Skills List -> Read-Update / Create
          * TODO: References List -> Read-Update / Create
          * TODO: Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
          * TODO: Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply        

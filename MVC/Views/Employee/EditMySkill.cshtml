@@ -11,14 +11,22 @@
             {
                 <div class="form-group">
                     @Html.LabelFor(model => model.Skill.Name)
-                    @Html.DisplayTextFor(model => model.Skill.Name)
-                    @Html.HiddenFor(model => model.Skill.Name)
+                    @if (Model.EditSkill == true)
+                    {
+                        @Html.DisplayTextFor(model => model.Skill.Name)
+                        @Html.HiddenFor(model => model.Skill.Name)
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.Skill.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Skill.Name)
+                    }
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.Skill.Details)
                     @Html.TextBoxFor(model => model.Skill.Details, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Skill.Name)
+                    @Html.ValidationMessageFor(model => model.Skill.Details)
                 </div>
 
                 <div class="form-group">
@@ -26,8 +34,15 @@
                     @Html.TextBoxFor(model => model.Skill.RangeOfKnowledge, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Skill.RangeOfKnowledge)
                 </div>
-                <input id="Submit" type="submit" value="Update" asp-controller="Employee" asp-action="UpdateMySkill" class="btn btn-primary">
+                @if (Model.EditSkill == true)
+                {
+                    <input id="Submit" type="submit" value="Update" asp-controller="Employee" asp-action="UpdateMySkill" class="btn btn-primary">
+                }
+                else
+                {
+                    <input id="Submit" type="submit" value="Create" asp-controller="Employee" asp-action="CreateMySkill" class="btn btn-primary">
+                }
             }
-            </div>
+        </div>
         </div>
 </div>
