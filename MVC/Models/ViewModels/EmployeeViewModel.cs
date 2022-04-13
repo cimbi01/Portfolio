@@ -19,6 +19,8 @@ namespace MVC.Models.ViewModels
         }
 
         //TODO: Enum -> EditSkillType
+        public bool? EditReference{ get; set; }
+        //TODO: Enum -> EditSkillType
         public bool? EditSkill { get; set; }
         public string? SelectedSkillName { get; set; }
         public Skill? Skill { get; set; }

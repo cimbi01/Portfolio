@@ -15,11 +15,23 @@ namespace Jobs.Common.Factories
             Skill skill = new Skill(name, rangeOfKnowledge, details);
             return skill;
         }
-
-        public Reference CreateReference(string name, string url, string? details = null)
+        public Skill CreateSkill(Skill skill, Employee employee)
         {
-            Uri urlGenerated = new Uri(url);
-            Reference reference = new Reference(name, urlGenerated, details);
+            Skill createdSkill = new Skill(skill);
+            employee.ProfessionData.Skills.Add(skill);
+            return skill;
+        }
+
+
+        public Reference CreateReference(string name, string? url, string? details = null)
+        {
+            Reference reference = new Reference(name, url, details);
+            return reference;
+        }
+        public Reference CreateReference(Reference reference, Employee employee)
+        {
+            Reference referenceCreated = new Reference(reference);
+            employee.ProfessionData.References.Add(referenceCreated);
             return reference;
         }
 

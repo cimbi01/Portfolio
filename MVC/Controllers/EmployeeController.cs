@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Jobs.Common;
 using Jobs.Common.Factories;
+using Jobs.Data;
 using Jobs.Data.WorkingPerson.Employee;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -54,7 +55,7 @@ namespace MVC.Controllers
             bool valid = this.TryValidateModel(employeeViewModel.Skill, nameof(employeeViewModel.Skill));
             if (valid)
             {
-                this._userHandlerService.ActiveEmployee.ProfessionData.Skills.Add(employeeViewModel.Skill);
+                Skill skill = this._offerHandleredFactory.CreateSkill(employeeViewModel.Skill, this._userHandlerService.ActiveEmployee);
             }
             employeeViewModel = this.InitializeEmployeeViewModel(employeeViewModel);
             return View("MySkills", employeeViewModel);
@@ -72,8 +73,50 @@ namespace MVC.Controllers
             return View("MySkills", employeeViewModel);
         }
 
+        //TODO: Refactor Code Clones Skill - Reference (Edit, Create, CreateEmpty)
+        public IActionResult MyReferences()
+        {
+            return View(this.InitializeEmployeeViewModel());
+        }
+
+        public IActionResult EditMyReference(EmployeeViewModel employeeViewModel)
+        {
+            employeeViewModel.Reference = this._userHandlerService.ActiveEmployee.ProfessionData.References.First(reference => reference.Name == employeeViewModel.SelectedReferenceName);
+            employeeViewModel.EditReference = true;
+            return View("EditMyReference", employeeViewModel);
+        }
+
+        public IActionResult CreateMyReferenceEmpty()
+        {
+            EmployeeViewModel employeeViewModel = this.InitializeEmployeeViewModel();
+            employeeViewModel.EditReference = false;
+            return View("EditMyReference", employeeViewModel);
+        }
+
+        public IActionResult CreateMyReference(EmployeeViewModel employeeViewModel)
+        {
+            bool valid = this.TryValidateModel(employeeViewModel.Reference, nameof(employeeViewModel.Reference));
+            if (valid)
+            {
+                Reference reference = this._offerHandleredFactory.CreateReference(employeeViewModel.Reference, this._userHandlerService.ActiveEmployee);
+            }
+            employeeViewModel = this.InitializeEmployeeViewModel(employeeViewModel);
+            return View("MyReferences", employeeViewModel);
+        }
+
+        public IActionResult UpdateMyReference(EmployeeViewModel employeeViewModel)
+        {
+            bool valid = this.TryValidateModel(employeeViewModel.Reference, nameof(employeeViewModel.Reference));
+            if (valid)
+            {
+                int referenceIndex = this._userHandlerService.ActiveEmployee.ProfessionData.References.FindIndex(reference => reference.Name == employeeViewModel.Reference.Name);
+                this._userHandlerService.ActiveEmployee.ProfessionData.References[referenceIndex] = employeeViewModel.Reference;
+            }
+            employeeViewModel = this.InitializeEmployeeViewModel(employeeViewModel);
+            return View("MyReferences", employeeViewModel);
+        }
+
         /*
-         * TODO: References List -> Read-Update / Create
          * TODO: Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
          * TODO: Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply        
          */

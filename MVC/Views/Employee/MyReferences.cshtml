@@ -1,0 +1,49 @@
+﻿@{
+    @using MVC.Models.ViewModels;
+    @using Jobs.Data;
+    @using Jobs.Data.WorkingPerson.Employee;
+    @using MVC.Services;
+    @model EmployeeViewModel
+    @inject UserHandlerService UserHandlerService
+    ViewData["Title"] = "My References";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <a asp-action="CreateMyReferenceEmpty" asp-controller="Employee" class="btn btn-primary">Create</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Details</th>
+                        <th scope="col">RangeOfKnowledge</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Reference reference in Model.ProfessionData.References)
+                    {
+                        <tr class="form-group">
+                            <td>
+                                @Html.DisplayTextFor(Model => reference.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayTextFor(model => reference.Details)
+                            </td>
+                            <td>
+                                @Html.DisplayTextFor(model => reference.Url)
+                            </td>
+                            <td>
+                                <a asp-route-SelectedReferenceName="@reference.Name" asp-action="EditMyReference" asp-controller="Employee" class="btn btn-primary">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,7 @@ namespace Jobs.Common.Factories
         private const int NUMBEROFEMPLOYERS = 5;
         private const int NUMBEROFJOBDATAS= 15;
         private const int MAXNUMBEROFSKILLS = 10;
+        private const int MAXNUMBEROFREFERENCES = 10;
         private Random random = new Random();
         private static bool seeded = false;
         private List<Employer> employers;
@@ -43,12 +44,33 @@ namespace Jobs.Common.Factories
             }
             return skills;
         }
+        private List<Reference> GenerateReferences()
+        {
+            //TODO: NeededSkills, HadSkill -> List -> Dictionary
+            List<Reference> references = new List<Reference>();
+            for (int j = 0; j < random.Next(MAXNUMBEROFREFERENCES); j++)
+            {
+                string details = "details" + Convert.ToString(j);
+                string url = "https://www.youtube.com/" + Convert.ToString(j); 
+                references.Add(this.CreateReference(Convert.ToString(random.Next()), url, details));
+            }
+            return references;
+        }
+        
+        private Employee GenerateEmployee(int i)
+        {
+            string name = "Employee" + Convert.ToString(i);
+            Employee employee = this.CreateEmployee(name);
+            employee.ProfessionData.References.AddRange(this.GenerateReferences());
+            employee.ProfessionData.Skills.AddRange(this.GenerateSkills());
+            return employee;
+        }
+
         public void SeedData()
         {
             for (int i = 0; i < NUMBEROFEMPLOYEES; i++)
             {
-                string name = "Employee" + Convert.ToString(i);
-                this.CreateEmployee(name).ProfessionData.Skills.AddRange(this.GenerateSkills());
+                GenerateEmployee(i);
             }
 
             for (int i = 0; i < NUMBEROFEMPLOYERS; i++)

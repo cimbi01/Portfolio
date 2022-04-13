@@ -46,7 +46,7 @@ namespace Jobs.Test.Common.Factories
             string url = "https://www.youtube.com/";
             Reference reference = this.factory.CreateReference(name, url, details);
             Assert.AreEqual(name, reference.Name);
-            Assert.AreEqual(url, reference.Url.OriginalString);
+            Assert.AreEqual(url, reference.Url);
             Assert.AreEqual(details, reference.Details);
             return reference;
         }
