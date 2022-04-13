@@ -57,7 +57,7 @@
                             </ul>
                         </td>
                         <td>@offer.Accepted?.ToString()</td>
-                        @if (offer.Accepted == null && offer.OfferType != OfferType.Advertisement)
+                        @if (offer.Accepted == null && offer.OfferType != OfferType.Advertisement && offer.Offerer != UserHandlerService.ActiveUser)
                         {
                             <td>
                                 <a class="btn btn-primary" asp-action="AcceptJobOffer" asp-controller="WorkingPerson" asp-route-SelectedJobDataName="@offer.JobData.Name">Accept</a>

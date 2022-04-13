@@ -97,7 +97,7 @@ namespace Jobs.Common.Factories
                         jobOffer = this.OfferHandler.OfferJob(jobdata1, employer, employee);
                         break;
                     case 1:
-                        jobOffer = this.OfferHandler.ApplyForJob(jobdata1, employee, employer);
+                        jobOffer = this.OfferHandler.ApplyForJob(jobdata1, employee);
                         break;
                     case 2:
                         jobOffer = this.OfferHandler.AdvertiseJob(jobdata1, employer);

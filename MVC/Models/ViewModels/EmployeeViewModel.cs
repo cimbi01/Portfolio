@@ -17,7 +17,7 @@ namespace MVC.Models.ViewModels
         {
 
         }
-
+        public string? JobNameForApplication { get; set; }
         //TODO: Enum -> EditSkillType
         public bool? EditReference{ get; set; }
         //TODO: Enum -> EditSkillType

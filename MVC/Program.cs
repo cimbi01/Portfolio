@@ -15,19 +15,13 @@ namespace MVC
         * TODO: MVC:
         * 
         * TODO: Use Hidden fields
-        * Controllers:
-        *      Employee:
-        *          References List -> Read-Update / Create
-        *          Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
-        *          Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply
+        * 
+        * Controllers:      
         *      Employer:
         *          Create -> JobAdvertisement
         *          Read -> Own JobOffers -> (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
         *          Read -> Employees ProfessionData -> JobOffer
-        *
-        *   Decorator -> RenderView -> JS -> add ability
         *          
-        * TODO: Factory
         * TODO: Tests
        */
 

@@ -116,6 +116,7 @@ namespace MVC.Controllers
             return View("MyReferences", employeeViewModel);
         }
 
+        //TODO: Refactor PartialViews
         public override IActionResult Advertisements()
         {
             EmployeeViewModel employeeViewModel = this.InitializeEmployeeViewModel();
@@ -123,9 +124,17 @@ namespace MVC.Controllers
             return View(employeeViewModel);
         }
 
-        /*
-         * TODO: Read -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()
-         * TODO: Read  -> Advertisements (Employers) -> +-> CalculateSuitability, Apply -> ViewComponennt
-         */
+        public IActionResult ApplyForJob(EmployeeViewModel employeeViewModel)
+        {
+            bool valid = this.TryValidateModel(employeeViewModel.JobNameForApplication, nameof(employeeViewModel.JobNameForApplication));
+            if (valid)
+            {
+                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == employeeViewModel.JobNameForApplication && offer.OfferType == OfferType.Advertisement);
+                this._offerHandler.ApplyForJob(jobOffer.JobData, this._userHandlerService.ActiveEmployee);
+            }
+            employeeViewModel = this.InitializeEmployeeViewModel(employeeViewModel);
+            return RedirectToAction("Advertisements");
+        }
+
     }
 }
