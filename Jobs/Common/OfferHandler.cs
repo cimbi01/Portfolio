@@ -32,6 +32,13 @@ namespace Jobs.Common
          *      TODO: Project:Data -> Data Context, Repositories, Entity FW
          */
 
+        public List<JobOffer> GetJobOffers(WorkingPerson workingPerson)
+        {
+            return this.JobOffers.Where(offer =>
+                workingPerson.Contact.Name == offer.Receiver?.Contact.Name
+                || workingPerson.Contact.Name == offer.Offerer.Contact.Name).ToList();
+        }
+
         public List<JobOffer> Advertisements
         {
             get => this.JobOffers.Where(offer => offer.OfferType == OfferType.Advertisement).ToList();

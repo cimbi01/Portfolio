@@ -13,6 +13,8 @@ namespace MVC.Models.ViewModels
         public string? OrderString { get; set; }
         public Contact? Contact { get; set; }
         public List<JobOffer>? ManagedAdvertisements { get; set; }
+        public List<JobOffer>? ManagedJobOffers{ get; set; }
+        public string? JobDataName { get; set; }
 
         public WorkingPersonViewModel()
         {

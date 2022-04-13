@@ -37,6 +37,7 @@ namespace MVC.Controllers
         private WorkingPersonViewModel InitializeWorkingPersonViewModel(WorkingPersonViewModel model, bool ContactUpdate = true)
         {
             model.ManagedAdvertisements = this._offerHandler.Advertisements;
+            model.ManagedJobOffers = this._offerHandler.GetJobOffers(this._userHandlerService.ActiveUser);
             if(ContactUpdate)
             { 
                 model.Contact = this._userHandlerService.ActiveUser.Contact;
@@ -50,6 +51,11 @@ namespace MVC.Controllers
         }
 
         public IActionResult Advertisements()
+        {
+            return View(this.InitializeWorkingPersonViewModel());
+        }
+
+        public IActionResult MyJobOffers()
         {
             return View(this.InitializeWorkingPersonViewModel());
         }
