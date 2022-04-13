@@ -16,7 +16,6 @@ namespace MVC
         * 
         * Controllers:
         *      WorkingPerson
-        *          Read  -> Advertisements (Employers) (Filter, Sort)
         *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline
         *      Employee:
         *          Create/Read/Update/Delete -> ProfessionData -> Skills, References

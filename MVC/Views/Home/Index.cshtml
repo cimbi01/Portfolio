@@ -3,8 +3,10 @@
     @using MVC.Models.ViewModels;
     @using MVC.Services;
     @using Jobs.Data.WorkingPerson;
+    @using Jobs.Common;
     @model HomeViewModel
     @inject UserHandlerService UserHandlerService
+    @inject OfferHandler OfferHandler
     string selectedUserName = UserHandlerService.ActiveUser?.Contact.Name ?? "No selected User";
     ViewData["Title"] = "Home Page";
 }
@@ -65,29 +67,29 @@
 
     <div class="row text-center">
         <div class="col">
-                <h3 class="h3">Select Employee/Employer</h3>
-                @using (Html.BeginForm("UseUser", "Home", FormMethod.Post))
-                {
-                    <div class="form-group">
-                        <select id="userSelect" onchange="this.form.submit()" asp-for="@Model.SelectedUserName">
-                            <option value="" selected>No User Selected</option>
-                            @foreach (WorkingPerson workingPerson in UserHandlerService.WorkingPeople)
+            <h3 class="h3">Select Employee/Employer</h3>
+            @using (Html.BeginForm("UseUser", "Home", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <select id="userSelect" onchange="this.form.submit()" asp-for="@Model.SelectedUserName">
+                        <option value="" selected>No User Selected</option>
+                        @foreach (WorkingPerson workingPerson in OfferHandler.WorkingPeople)
+                        {
+                            if (UserHandlerService.ActiveUser?.Contact.Name == workingPerson.Contact.Name)
                             {
-                                if (UserHandlerService.ActiveUser?.Contact.Name == workingPerson.Contact.Name)
-                                {
-                                    <option value="@workingPerson.Contact.Name" selected>@workingPerson.Contact.Name</option>
-                                }
-                                if (UserHandlerService.ActiveUser?.Contact.Name != workingPerson.Contact.Name)
-                                {
-                                    <option value="@workingPerson.Contact.Name">@workingPerson.Contact.Name</option>
-                                }
+                                <option value="@workingPerson.Contact.Name" selected>@workingPerson.Contact.Name</option>
                             }
-                        </select>
-                    </div>
-                }
-                <p>
-                    Selected User: @selectedUserName
-                </p>
+                            if (UserHandlerService.ActiveUser?.Contact.Name != workingPerson.Contact.Name)
+                            {
+                                <option value="@workingPerson.Contact.Name">@workingPerson.Contact.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            }
+            <p>
+                Selected User: @selectedUserName
+            </p>
         </div>
     </div>
 </div>

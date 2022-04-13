@@ -13,19 +13,19 @@
             @using (Html.BeginForm(FormMethod.Post))
             {
                 <div class="form-group">
-                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.Name)
-                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.Name, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.Name })
-                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.Name)
+                    @Html.LabelFor(Model => Model.Contact.Name)
+                    @Html.TextBoxFor(Model => Model.Contact.Name, new { @class = "form-control", @Value = Model.Contact.Name })
+                    @Html.ValidationMessageFor(Model => Model.Contact.Name)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.EmailAddress)
-                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.EmailAddress, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.EmailAddress })
-                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.EmailAddress)
+                    @Html.LabelFor(Model => Model.Contact.EmailAddress)
+                    @Html.TextBoxFor(Model => Model.Contact.EmailAddress, new { @class = "form-control", @Value = Model.Contact.EmailAddress })
+                    @Html.ValidationMessageFor(Model => Model.Contact.EmailAddress)
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(Model => Model.WorkingPerson.Contact.PhoneNumber)
-                    @Html.TextBoxFor(Model => Model.WorkingPerson.Contact.PhoneNumber, new { @class = "form-control", @Value = Model.WorkingPerson.Contact.PhoneNumber })
-                    @Html.ValidationMessageFor(Model => Model.WorkingPerson.Contact.PhoneNumber)
+                    @Html.LabelFor(Model => Model.Contact.PhoneNumber)
+                    @Html.TextBoxFor(Model => Model.Contact.PhoneNumber, new { @class = "form-control", @Value = Model.Contact.PhoneNumber })
+                    @Html.ValidationMessageFor(Model => Model.Contact.PhoneNumber)
                 </div>
                 <input id="Submit" type="submit" value="Update MyContact" asp-controller="WorkingPerson" asp-action="UpdateMyContact" class="btn btn-primary">
             }

@@ -8,50 +8,71 @@
     ViewData["Title"] = "WorkingPerson Home Page";
 }
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Details</th>
-                        <th scope="col">NeededSkills</th>
-                        <th scope="col">Offerer</th>
-                        <th scope="col">Employees</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (JobOffer advertisement in Model.Advertisements)
-                    {
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                @using (Html.BeginForm("OrderAdvertisements", "WorkingPerson", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.OrderString)
+                        <select id="orderSelect" onchange="this.form.submit()" asp-for="@Model.OrderString" class="form-control .d-inline-flex">
+                            <option value="Name">Name</option>
+                            <option value="Details">Details</option>
+                            <option value="Offerer">Offerer</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.OrderString)
+                    </div>
+                    <div class="form-check">
+                        @Html.LabelFor(model => model.Ascending)
+                        @Html.CheckBoxFor(model => model.Ascending, new { @class = "form-check-input", @onchange = "this.form.submit()" })
+                        @Html.ValidationMessageFor(model => model.Ascending)
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@advertisement.JobData.Name</td>
-                            <td>@advertisement.JobData.Details</td>
-                            <td>
-                                <ul>
-                                    @foreach (Skill skill in advertisement.JobData.NeededSkills)
-                                    {
-                                        <li>
-                                            @skill.Name : @skill.RangeOfKnowledge
-                                        </li>
-                                    }
-                                </ul>
-                            </td>
-                            <td>@advertisement.JobData.Employer.Contact.Name</td>
-                            <td>
-                                <ul>
-                                    @foreach (Employee employee in advertisement.JobData.Employees)
-                                    {
-                                        <li>
-                                            @employee.Contact.Name
-                                        </li>
-                                    }
-                                </ul>
-                            </td>
+                            <th scope="col">Name</th>
+                            <th scope="col">Details</th>
+                            <th scope="col">NeededSkills</th>
+                            <th scope="col">Offerer</th>
+                            <th scope="col">Employees</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (JobOffer advertisement in Model.ManagedAdvertisements)
+                        {
+                            <tr>
+                                <td>@advertisement.JobData.Name</td>
+                                <td>@advertisement.JobData.Details</td>
+                                <td>
+                                    <ul>
+                                        @foreach (Skill skill in advertisement.JobData.NeededSkills)
+                                        {
+                                            <li>
+                                                @skill.Name : @skill.RangeOfKnowledge
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                                <td>@advertisement.JobData.Employer.Contact.Name</td>
+                                <td>
+                                    <ul>
+                                        @foreach (Employee employee in advertisement.JobData.Employees)
+                                        {
+                                            <li>
+                                                @employee.Contact.Name
+                                            </li>
+                                        }
+                                    </ul>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>

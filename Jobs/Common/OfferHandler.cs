@@ -5,6 +5,7 @@ using Jobs.Data.WorkingPerson.Employee;
 using Jobs.Data.WorkingPerson.Employer;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Jobs.Common
@@ -31,6 +32,20 @@ namespace Jobs.Common
          *      TODO: Project:Data -> Data Context, Repositories, Entity FW
          */
 
+        public List<JobOffer> Advertisements
+        {
+            get => this.JobOffers.Where(offer => offer.OfferType == OfferType.Advertisement).ToList();
+        }
+        public List<WorkingPerson> WorkingPeople
+        {
+            get
+            {
+                List<WorkingPerson> workingPeople = new List<WorkingPerson>();
+                this.Employees.ForEach(emp => workingPeople.Add(emp));
+                this.Employers.ForEach(emp => workingPeople.Add(emp));
+                return workingPeople;
+            }
+        }
         public List<Employee> Employees { get; } = new List<Employee>();
         public List<Employer> Employers { get; } = new List<Employer>();
         public List<JobOffer> JobOffers { get; } = new List<JobOffer>();

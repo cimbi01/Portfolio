@@ -51,7 +51,7 @@ namespace MVC.Controllers
                 bool valid = this.TryValidateModel(homeViewModel.SelectedUserName, nameof(homeViewModel.SelectedUserName));
                 if (valid)
                 { 
-                    this._userHandlerService.ActiveUser = this._userHandlerService.WorkingPeople.First(ppl => ppl.Contact.Name == homeViewModel.SelectedUserName);
+                    this._userHandlerService.ActiveUser = this._offerHandler.WorkingPeople.First(ppl => ppl.Contact.Name == homeViewModel.SelectedUserName);
                 }
             }
             return View(nameof(Index), homeViewModel);
@@ -62,11 +62,11 @@ namespace MVC.Controllers
         {
             homeViewModel.CreatedEmployer = null;
             bool valid = this.TryValidateModel(homeViewModel.CreatedEmployee, nameof(homeViewModel.CreatedEmployee));
-            if (valid && !this._userHandlerService.WorkingPeople.Any( emp => emp.Contact.Name == homeViewModel.CreatedEmployee.Contact.Name))
+            if (valid && !this._offerHandler.WorkingPeople.Any( emp => emp.Contact.Name == homeViewModel.CreatedEmployee.Contact.Name))
             {
                 this._offerHandleredFactory.CreateEmployee(homeViewModel.CreatedEmployee);
             }
-            else if(this._userHandlerService.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployee.Contact.Name))
+            else if(this._offerHandler.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployee.Contact.Name))
             {
                 ModelState.AddModelError(string.Empty, String.Format("The given name: {0} already taken", homeViewModel.CreatedEmployee.Contact.Name));
             }
@@ -78,11 +78,11 @@ namespace MVC.Controllers
         {
             homeViewModel.CreatedEmployee = null;
             bool valid = this.TryValidateModel(homeViewModel.CreatedEmployer, nameof(homeViewModel.CreatedEmployer));
-            if (valid && !this._userHandlerService.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployer.Contact.Name))
+            if (valid && !this._offerHandler.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployer.Contact.Name))
             {
                 this._offerHandleredFactory.CreateEmployer(homeViewModel.CreatedEmployer);
             }
-            else if (this._userHandlerService.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployer.Contact.Name))
+            else if (this._offerHandler.WorkingPeople.Any(emp => emp.Contact.Name == homeViewModel.CreatedEmployer.Contact.Name))
             {
                 ModelState.AddModelError(string.Empty, String.Format("The given name: {0} already taken", homeViewModel.CreatedEmployer.Contact.Name));
             }
