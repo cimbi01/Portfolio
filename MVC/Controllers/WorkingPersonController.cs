@@ -116,8 +116,28 @@ namespace MVC.Controllers
             return View("Advertisements", workingPersonViewModel);
         }
 
-        /*
-         * TODO: Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline
-         */
+        public IActionResult AcceptJobOffer(WorkingPersonViewModel workingPersonViewModel)
+        {
+            workingPersonViewModel = this.InitializeWorkingPersonViewModel(workingPersonViewModel, false);
+            bool valid = this.TryValidateModel(workingPersonViewModel.SelectedJobDataName, nameof(workingPersonViewModel.SelectedJobDataName));
+            if (valid)
+            {
+                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName);
+                this._offerHandler.AcceptJobOffer(jobOffer);
+            }
+            return View("MyJobOffers", workingPersonViewModel);
+        }
+
+        public IActionResult DeclineJobOffer(WorkingPersonViewModel workingPersonViewModel)
+        {
+            workingPersonViewModel = this.InitializeWorkingPersonViewModel(workingPersonViewModel, false);
+            bool valid = this.TryValidateModel(workingPersonViewModel.SelectedJobDataName, nameof(workingPersonViewModel.SelectedJobDataName));
+            if (valid)
+            {
+                JobOffer jobOffer = this._offerHandler.JobOffers.First(offer => offer.JobData.Name == workingPersonViewModel.SelectedJobDataName);
+                this._offerHandler.DeclineJobOffer(jobOffer);
+            }
+            return View("MyJobOffers", workingPersonViewModel);
+        }
     }
 }

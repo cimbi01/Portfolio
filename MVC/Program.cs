@@ -15,8 +15,6 @@ namespace MVC
         * TODO: MVC:
         * 
         * Controllers:
-        *      WorkingPerson
-        *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline
         *      Employee:
         *          Create/Read/Update/Delete -> ProfessionData -> Skills, References
         *          Read -> Own JobOffers (Filter, Sort) -> (Own) ReceivedJobOffers Accept/Decline +-> (Own) ReceivedJobOffers CalculateSuitability()

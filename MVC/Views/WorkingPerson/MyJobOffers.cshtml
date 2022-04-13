@@ -22,6 +22,9 @@
                         <th scope="col">NeededSkills</th>
                         <th scope="col">Offerer</th>
                         <th scope="col">Receiver</th>
+                        <th scope="col">Employees</th>
+                        <th scope="col">Accepted</th>
+                        <th scope="col">Tasks</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,6 +46,28 @@
                         </td>
                         <td>@offer.Offerer.Contact.Name</td>
                         <td>@offer.Receiver?.Contact.Name</td>
+                        <td>
+                            <ul>
+                                @foreach (Employee employee in offer.JobData.Employees)
+                                {
+                                    <li>
+                                        @employee.Contact.Name
+                                    </li>
+                                }
+                            </ul>
+                        </td>
+                        <td>@offer.Accepted?.ToString()</td>
+                        @if (offer.Accepted == null && offer.OfferType != OfferType.Advertisement)
+                        {
+                            <td>
+                                <a class="btn btn-primary" asp-action="AcceptJobOffer" asp-controller="WorkingPerson" asp-route-SelectedJobDataName="@offer.JobData.Name">Accept</a>
+                                <a class="btn btn-primary" asp-action="DeclineJobOffer" asp-controller="WorkingPerson" asp-route-SelectedJobDataName="@offer.JobData.Name">Decline</a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>No task needed</td>
+                        }
                     </tr>
                     }
                 </tbody>
