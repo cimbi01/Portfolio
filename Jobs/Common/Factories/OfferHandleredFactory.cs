@@ -16,19 +16,22 @@ namespace Jobs.Common.Factories
         {
             this.OfferHandler = offerHandler;
         }
-        
+
+        //TODO: Add to OfferHandler -> AddEmployer()
         private Employer HandleCreatedEmployer(Employer employer)
         {
             this.OfferHandler.Employers.Add(employer);
             return employer;
         }
 
+        //TODO: Add to OfferHandler -> AddEmployee()
         private Employee HandleCreatedEmployee(Employee employee)
         {
             this.OfferHandler.Employees.Add(employee);
             return employee;
         }
 
+        //TODO: Test
         /// <summary>
         /// Creates employee and adds it to <see cref="OfferHandler.Employees"/>
         /// </summary>
@@ -51,6 +54,7 @@ namespace Jobs.Common.Factories
             return this.HandleCreatedEmployee(employee);
         }
 
+        //TODO: Test
         /// <summary>
         /// Creates employer and adds it to <see cref="OfferHandler.Employers"/>
         /// </summary>

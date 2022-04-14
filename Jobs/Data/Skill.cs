@@ -25,6 +25,7 @@ namespace Jobs.Data
 
         }
 
+        //TODO: Test
         public Skill(Skill skill)
         {
             this.Name = skill.Name;

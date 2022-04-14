@@ -13,6 +13,7 @@ using System.Text;
 
 namespace Jobs.Test.Common.Factories
 {
+    //TODO: Refactor -> Separated FactoryTest - OfferHandleredFactoryTest
     [TestFixture]
     class FactoryTest : TestBase
     {

@@ -22,6 +22,24 @@ namespace MVC
         *          Read -> Own JobOffers -> (Own) ReceivedJobOffers Accept/Decline +->(Own) OfferedJobOfferers Start, End
         *          Read -> Employees ProfessionData -> JobOffer
         *          
+        * TODO: Identity:
+        *      Users
+        *      Login
+        *      Roles:
+        *          Employee
+        *          Employer
+        * 
+        * TODO: Notifications:
+        *      NeededData -> Notification for Employees/Employers for needed data
+        *      Notifications (List Of Notifications):
+        *          Target (WorkingPerson)
+        *          Title (string)
+        *          Details (string?)
+        *          ActionToSolve (Action?)
+        * 
+        * TODO: EF Core
+        *      TODO: Project:Data -> Data Context, Repositories, Entity FW
+        *          
         * TODO: Tests
        */
 

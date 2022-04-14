@@ -15,6 +15,8 @@ namespace Jobs.Common.Factories
             Skill skill = new Skill(name, rangeOfKnowledge, details);
             return skill;
         }
+        
+        //TODO: test
         public Skill CreateSkill(Skill skill, Employee employee)
         {
             Skill createdSkill = new Skill(skill);
@@ -28,6 +30,8 @@ namespace Jobs.Common.Factories
             Reference reference = new Reference(name, url, details);
             return reference;
         }
+
+        //TODO: test
         public Reference CreateReference(Reference reference, Employee employee)
         {
             Reference referenceCreated = new Reference(reference);

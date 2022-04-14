@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Jobs.Test
 {
+    //TODO: Refactor WorkingPersonFactory - factory
     class TestBase
     {
         protected OfferHandler offerHandler;

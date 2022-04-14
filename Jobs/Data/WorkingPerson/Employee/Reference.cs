@@ -9,12 +9,15 @@ namespace Jobs.Data.WorkingPerson.Employee
         {
 
         }
+
+        //TODO: Test
         public Reference(Reference reference)
         {
             this.Name = reference.Name;
             this.Details = reference.Details;
             this.Url = reference.Url;
         }
+
         public Reference(string name, string? url, string? details = null)
         {
             this.Name = name;

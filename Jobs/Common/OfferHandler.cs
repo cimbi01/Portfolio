@@ -13,26 +13,10 @@ namespace Jobs.Common
     public class OfferHandler
     {
         /*
-         * TODO: Equality check -> private Id
-         * TODO: Identity:
-         *      Users
-         *      Login
-         *      Roles:
-         *          Employee
-         *          Employer
-         * 
-         * TODO: Notifications:
-         *      NeededData -> Notification for Employees/Employers for needed data
-         *      Notifications (List Of Notifications):
-         *          Target (WorkingPerson)
-         *          Title (string)
-         *          Details (string?)
-         *          ActionToSolve (Action?)
-         * 
-         * TODO: EF Core
-         *      TODO: Project:Data -> Data Context, Repositories, Entity FW
+         * TODO: Equality check for Datas -> private int Id (autoincremented) -> Dictionary<Type, int>
          */
 
+        //TODO Equality check
         public List<JobOffer> GetJobOffers(WorkingPerson workingPerson)
         {
             return this.JobOffers.Where(offer =>
@@ -45,6 +29,7 @@ namespace Jobs.Common
             get => this.JobOffers.Where(offer => offer.OfferType == OfferType.Advertisement).ToList();
         }
 
+        //TODO: readonlys
         public List<WorkingPerson> WorkingPeople
         {
             get
@@ -65,7 +50,7 @@ namespace Jobs.Common
             this.Factory = new OfferHandleredFactory(this);
         }
 
-        //TODO: Refactor Code Clone
+        //TODO: Refactor Code Clone 
         /// <summary>
         /// Adds Employee whos accepting - if not already exist - to <see cref="JobOffer.JobData.Employees"/> 
         /// Set <see cref="JobOffer.Accepted"/> to true
@@ -97,12 +82,12 @@ namespace Jobs.Common
         public void DeclineJobOffer(JobOffer jobOffer)
         {
             WorkingPerson receiver = jobOffer.Receiver;
-            // If employee accepts offering
+            // If employee declines offering
             if (receiver is Employee && !jobOffer.JobData.Employees.Contains((Employee)receiver))
             {
                 jobOffer.JobData.Employees.RemoveAll(employee => employee == (Employee)receiver);
             }
-            // If employer accepts application
+            // If employer declines application
             else if (receiver is Employer && !jobOffer.JobData.Employees.Contains((Employee)jobOffer.Offerer))
             {
                 jobOffer.JobData.Employees.RemoveAll(employee => employee == (Employee)jobOffer.Offerer);
@@ -110,19 +95,21 @@ namespace Jobs.Common
             jobOffer.Accepted = false;
         }
 
+        //TODO: throws exception for offering a job thats employee contains joboffer for this jobdata
         public JobOffer OfferJob(JobData jobData, Employer from, Employee to)
         {
             JobOffer jobOffer =  this.Factory.CreateJobOffer(OfferType.Offering, jobData, from, to);
             return jobOffer;
         }
 
-        //TODO: throws exception for applying a job thats jobdata.employees contains employee
+        //TODO: throws exception for applying a job thats jobdata.employees contains employee or 
         public JobOffer ApplyForJob(JobData jobData, Employee from)
         {
             JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Application, jobData, from, jobData.Employer);
             return jobOffer;
         }
 
+        //TODO: throws exception for advertise a job thats employer already contains joboffer for this jobdata
         public JobOffer AdvertiseJob(JobData jobData, Employer from)
         {
             JobOffer jobOffer = this.Factory.CreateJobOffer(OfferType.Advertisement, jobData, from);
